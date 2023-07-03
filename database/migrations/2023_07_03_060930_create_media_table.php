@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
+            $table->string('profile_image');
+            $table->string('background_images');
+            $table->unsignedBigInteger('villa_id');
+            $table->foreign('villa_id')->references('id')->on('villas')->onDelete('cascade');
             $table->timestamps();
         });
     }

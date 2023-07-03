@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
+            $table->string('address');
+            $table->unsignedBigInteger('villa_id');
+            $table->foreign('villa_id')->references('id')->on('villas')->onDelete('cascade');
             $table->timestamps();
         });
     }

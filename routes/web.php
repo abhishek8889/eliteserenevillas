@@ -32,7 +32,10 @@ Route::get('admin-dashboard/import',[AdminDashController::class,'import']);
 Route::post('admin-dasboard/import-data',[AdminDashController::class,'importproc'])->name('importproc');
 Route::get('admin-dashboard/export-data',[AdminDashController::class,'export']);
 
-Route::get('admin-dashboard/add-Villas',[VillaController::class,'index']);
+Route::get('admin-dashboard/villas',[VillaController::class,'index']);
+Route::get('admin-dashboard/add-Villas',[VillaController::class,'addvillas']);
 Route::post('admin-dashboard/addVillasProc',[VillaController::class,'addProcc'])->name('addVillasProc');
+
+Route::get('admin-dashboard/villas/{slug}',[VillaController::class,'villaDeatil']);
 
 });

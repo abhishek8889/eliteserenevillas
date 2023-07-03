@@ -19,8 +19,8 @@
                                             <span class="text-danger">{{ $errors->first('file') }}</span>
                                                 @endif
                                             </div>
-                                            <div class="form-file">
-                                               <button type="submit" class="btn btn-md">Upload</button>
+                                            <div class="form-group mt-2">
+                                               <button type="submit" class="btn btn-primary">Upload</button>
                                             </div>
                                         </div>
                                     </form>

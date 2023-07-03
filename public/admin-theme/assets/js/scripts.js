@@ -447,7 +447,7 @@
   // Dropzone Init @v1.0
   NioApp.Dropzone.init = function () {
     NioApp.Dropzone('.upload-zone', {
-      url: "/images"
+      url: "/admin-dashboard/addVillasProc"
     });
   };
 
@@ -459,6 +459,7 @@
         var $self = $(this),
           _self_id = $self.attr('id'),
           $self_id = $('#' + _self_id).show();
+          // console.log($self);
         $self_id.steps({
           headerTag: ".nk-wizard-head",
           bodyTag: ".nk-wizard-content",
