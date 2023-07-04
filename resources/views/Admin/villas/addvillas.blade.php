@@ -9,18 +9,18 @@
                     <form action="{{ route('addVillasProc') }}" method="post" enctype="multipart/form-data">
                         @csrf
                          <div class="form-group">
-                             <label class="form-label" for="default-01">Name</label>
+                             <label class="form-label" for="villaname">Name</label>
                              <div class="form-control-wrap">
-                                 <input type="text" class="form-control" name ="villaname" id="default-01" placeholder="Villas Name">
+                                 <input type="text" class="form-control" name ="villaname" id="villaname" placeholder="Villas Name">
                              </div>
                              @if ($errors->has('villaname'))
                             <span class="text-danger">{{ $errors->first('villaname') }}</span>
                              @endif
                          </div>
                          <div class="form-group">
-                             <label class="form-label" for="default-02">Slug</label>
+                             <label class="form-label" for="slug">Slug</label>
                              <div class="form-control-wrap">
-                                 <input type="text" class="form-control" name ="slug" id="default-02" placeholder="slug">
+                                 <input type="text" class="form-control" name ="slug" id="slug" placeholder="slug">
                              </div>
                              @if ($errors->has('slug'))
                             <span class="text-danger">{{ $errors->first('slug') }}</span>
@@ -67,15 +67,16 @@
                          </div>
                      </div> 
                     <div class="col-sm-6">
-                    <div class="form-group">
+                        <div class="form-group">
                             <label class="form-label" for="customMultipleFilesLabel">Upload Images</label>
                             <div class="form-control-wrap">
                                 <div class="form-file">
-                                    <input type="file" multiple class="form-file-input" name="images[]" id="customMultipleFiles">
+                                    <input type="file" class="form-file-input" name="images[]" id="customMultipleFiles">
                                     <label class="form-file-label" for="customMultipleFiles">Choose files</label>
                                 </div>
                             </div>
                          </div>
+                         
                     </div>
                      </form>
                    
@@ -83,5 +84,14 @@
              </div>
          </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('#villaname').on('keyup',function(){
+            let name = $(this).val().toLowerCase();
+            let slug = name.replace(/ /g, "-");
+           $('#slug').val(slug);
+        });
+    });
+</script>
 
 @endsection
