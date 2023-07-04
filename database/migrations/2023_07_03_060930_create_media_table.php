@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
+            $table->integer('villa_id');
+            $table->index('villa_id');
+            $table->foreign('villa_id')->references('id')->on('villas')->onDelete('cascade');
+            $table->string('media_name');
+            $table->string('media_url');
             $table->timestamps();
         });
     }

@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->id();
+            $table->index('villa_id');
+            // $table->foreign('villa_id')->references('id')->on('villas')->onDelete('cascade');
+            $table->string('street_name');
+            $table->string('city');
+            $table->string('state');
+            $table->string('country');
             $table->timestamps();
         });
     }
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('addresses');
+        Schema::dropIfExists('locations');
     }
 };
