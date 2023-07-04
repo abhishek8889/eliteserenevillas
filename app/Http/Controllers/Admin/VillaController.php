@@ -25,6 +25,6 @@ class VillaController extends Controller
     }
    }
    public function villaView($slug){
-         echo $slug;
+         
    }
 }
