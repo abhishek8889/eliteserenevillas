@@ -71,7 +71,6 @@
                                         <li class="nk-menu-item">
                                             <a href="{{url('/admin-dashboard/add-Villas')}}" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
                                         </li>
-
                                     </ul>
                                 </li>
                                 <!-- <li class="nk-menu-item has-sub">
