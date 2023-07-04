@@ -49,7 +49,7 @@ class AdminDashController extends Controller
             echo "End Date: $endDate\n";
             echo "description: $description\n";
             echo "UID: $uid\n";
-            echo '</pre>';  
+            echo '</pre>';
           }   
     }
     public function export(){
