@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Villas extends Model
 {
     use HasFactory;
+
+    public function address(){
+        return $this->hasOne(Address::class,'villa_id','id');
+    }
+    public function media(){
+        return $this->hasMany(Media::class,'villa_id','id');
+    }
 }
