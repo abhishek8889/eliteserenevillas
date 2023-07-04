@@ -75,7 +75,17 @@ class VillaController extends Controller
       }
    }
    public function villaView($slug){
-
-         return view('Admin.villas.villaview');
+         $villas = Villas::where('slug',$slug)->with('address','media')->first();
+      
+         return view('Admin.villas.villaview',compact('villas'));
+   }
+   public function delete($id){
+      $villas = Villas::find($id);
+      if($villas){
+         $villas->delete();
+         return redirect('admin-dashboard/villas')->with('success','Success!Villas deleted successfully');
+      }else{
+         return redirect()->back()->with('error','Failed to delete!something went wrong');
+      }
    }
 }
