@@ -32,6 +32,7 @@
             </div> -->
             <div class="nk-block">
                                     <div class="card card-bordered">
+            <h2 class="text-end" data-bs-toggle="modal" data-bs-target="#modalDefault"><em class="icon ni ni-edit"></em></h2>
                                         <div class="card-inner">
                                             <div class="row pb-5">
                                                 <div class="col-lg-6">
@@ -124,12 +125,55 @@
                                         </div>
                                     </div>
                                 </div>
+                            <div class="modal fade" tabindex="-1" id="modalDefault">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                            <em class="icon ni ni-cross"></em>
+                                        </a>
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Modal Title</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="nk-block">
+                                                    <div class="row g-gs">
+                                                        @foreach($villas['media'] as $media)
+                                                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                                                            <div class="gallery card card-bordered">
+                                                                <a class="gallery-image popup-image" href="{{ url('villa_images/'.$media->media_name) }}">
+                                                                    <img class="w-100 rounded-top" src="{{ url('villa_images/'.$media->media_name) }}" alt="">
+                                                                </a>
+                                                                <div class="gallery-body card-inner align-center justify-between flex-wrap g-2">
+                                                                    <form action="{{ url('admin-dashboard/villas/update') }}" id="media_form" method="post" enctype="multipart/form-data">
+                                                                     @csrf
+                                                                     <input type="hidden" name="image_id" value="{{ $media->id }}">
+                                                                    <input type="file" class="file_upload" id="file{{ $media->id }}" name="file" style="display:none;">   
+                                                                    <div class="user-card">
+                                                                        <label for="file{{ $media->id }}" class="btn">
+                                                                     update</label>
+                                                                     </form>
+                                                                      <button class="btn" id="delete" data-id="{{ $media->id }}">delete</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <div class="modal-footer bg-light">
+                                            <span class="sub-text">Modal Footer Text</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 <script>
     $(document).ready(function(){
         // $('#edit_form').hide();
     $('#edit').on('click',function(){
         $(this).parent().parent().hide();
         $('#edit_form').show();
+        $('#edit_form').focus();
         $('#edit_form').focusout(function(){
        $('#edit').parent().parent().show();
        $(this).hide();
@@ -165,12 +209,10 @@
          processData: false,
          success: function(response)
          {
-            console.log(response);
             $('#location-form').hide();
             $('#edit_location').parent().parent().show();
             html = response.street_name+','+response.city+','+response.state+','+response.country;
-            $('#location-span').html(html);
-
+            $('.location-span').html(html);
          }
         })
     });
@@ -179,6 +221,10 @@
 
     });
 });
+$('.file_upload').change(function(){
+    // console.log($(this).val());
+    $('#media_form').submit();
+})
 </script>
 
 @endsection

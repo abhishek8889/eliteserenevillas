@@ -96,6 +96,12 @@ class VillaController extends Controller
       $update->slug = $slug;
       $update->update();
       return response()->json('successfully updated villas name');
+      }
+      elseif($request->image_id){
+         $media = Media::find($request->image_id);
+         if($request->hasFile('file')){
+            ///////
+         }
       }else{
         $request->validate([
          'street' => 'required',
