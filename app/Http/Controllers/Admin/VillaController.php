@@ -11,8 +11,9 @@ use Auth;
 class VillaController extends Controller
 {
    public function index(){
-
-      return view('Admin.villas.index');
+      $villas = Villas::with('address','media')->get();
+     
+      return view('Admin.villas.index',compact('villas'));
    }
    public function addvillas(){
 
@@ -21,7 +22,7 @@ class VillaController extends Controller
    public function addProcc(Request $request){
       $request->validate([
          'villaname' => 'required',
-         'slug' => 'required',
+         'slug' => 'required|unique:villas',
          'street_name' => 'required',
          'city' => 'required',
          'state' => 'required',
@@ -53,7 +54,7 @@ class VillaController extends Controller
               $media = new Media;
               $media->villa_id = $villas->id;
               $media->media_name = $name;
-              $media->media_url = url('public/villa_images/'.$name);
+              $media->media_url = url('villa_images/'.$name);
               $media->save();
               $media_ids[] = $media->id; 
             }
@@ -66,7 +67,7 @@ class VillaController extends Controller
          }
          $villas_update = Villas::find($villas->id);
          $villas_update->Location_id = $address->id;
-         $villas_update->banner_id = json_encode($media_ids);
+         $villas_update->banner_id = json_encode([$media['id']]);
          $villas_update->update();
          return redirect()->back()->with(['success'=>'successfully saved villas']);
       }else{
@@ -74,6 +75,42 @@ class VillaController extends Controller
       }
    }
    public function villaView($slug){
-         
+         $villas = Villas::where('slug',$slug)->with('address','media')->first();
+      
+         return view('Admin.villas.villaview',compact('villas'));
    }
+   public function delete($id){
+      $villas = Villas::find($id);
+      if($villas){
+         $villas->delete();
+         return redirect('admin-dashboard/villas')->with('success','Success!Villas deleted successfully');
+      }else{
+         return redirect()->back()->with('error','Failed to delete!something went wrong');
+      }
+   }
+   public function update(Request $request){
+      if($request->val){
+      $slug = strtolower(str_replace(" ","-",$request->val));
+      $update = Villas::find($request->id);
+      $update->name = $request->val;
+      $update->slug = $slug;
+      $update->update();
+      return response()->json('successfully updated villas name');
+      }else{
+        $request->validate([
+         'street' => 'required',
+         'city' => 'required',
+         'state' => 'required',
+         'country_name' => 'required',
+        ]);
+        $update = Address::find($request->id);
+        $update->street_name = $request->street;
+        $update->city = $request->city;
+        $update->state = $request->state;
+        $update->country = $request->country_name;
+        $update->update();
+        return response()->json($update);
+      }
+   }
+
 }
