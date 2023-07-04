@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('villas', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
             $table->string('name');
             $table->string('slug');
-            $table->string('location');
+            $table->string('Location_id'); // get from Location table. 
+            $table->string('banner_id'); // get from media table
             $table->timestamps();
         });
     }
