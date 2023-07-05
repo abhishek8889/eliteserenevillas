@@ -11,8 +11,10 @@
     <!-- add coustam css file here -->
   
     <!-- StyleSheets  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css?ver=3.1.2') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}"> 
+   
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 </head>
 
@@ -30,12 +32,15 @@
                         <a href="#" class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em class="icon ni ni-arrow-left"></em></a>
                         <a href="#" class="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
                     </div>
-                    <div class="nk-sidebar-brand">
-                        <a href="{{ url('admin-dashboard') ?? ''}}" class="logo-link nk-sidebar-logo">
-                            <img class="logo-light logo-img" src="{{ asset('admin-theme/images/logo.png') }}" srcset="{{ asset('admin-theme/images/logo2x.png 2x') }}" alt="logo">
-                            <img class="logo-dark logo-img" src="{{ asset('admin-theme/images/logo-dark.png') }}" srcset="{{ asset('admin-theme/images/logo-dark2x.png 2x') }}" alt="logo-dark">
-                        </a>
-                    </div>
+                    <!-- <div class="">
+                        <a href="{{ url('admin-dashboard') ?? ''}}" class=""> -->
+                            <!-- <img class="logo-light logo-img" src="{{ asset('admin-theme/images/logo.png') }}" srcset="{{ asset('admin-theme/images/logo2x.png 2x') }}" alt="logo">
+                            <img class="logo-dark logo-img" src="{{ asset('admin-theme/images/logo-dark.png') }}" srcset="{{ asset('admin-theme/images/logo-dark2x.png 2x') }}" alt="logo-dark"> -->
+                            <div class="middle-logo">
+                                    <h1>Elite Serene Villas</h1>
+                            </div>
+                        <!-- </a>
+                    </div> -->
                 </div><!-- .nk-sidebar-element -->
                 <div class="nk-sidebar-element nk-sidebar-body">
                     <div class="nk-sidebar-content">
@@ -62,7 +67,7 @@
                                 <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
                                         <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
-                                        <span class="nk-menu-text">Villas</span>
+                                        <span class="nk-menu-text">Listing</span>
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
@@ -70,6 +75,9 @@
                                         </li>
                                         <li class="nk-menu-item">
                                             <a href="{{url('/admin-dashboard/add-Villas')}}" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{url('/admin-dashboard/add-Villas')}}" class="nk-menu-link"><span class="nk-menu-text">Edit</span></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -262,7 +270,7 @@
         </div>
     </div>
     <!-- JavaScript -->
-    
+ 
     <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>
     <script src="{{ asset('admin-theme/assets/js/scripts.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/charts/gd-default.js?ver=3.1.2') }}"></script>
