@@ -19,8 +19,10 @@ use App\Http\Controllers\Admin\VillaController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
-Route::get('/',[AuthenticationController::class,'index']);
+Route::get('/' ,function(){
+    return view('welcome');
+});
+Route::get('/admin-login',[AuthenticationController::class,'index']);
 Route::post('/loginprocc',[AuthenticationController::class,'loginProcc']);
 Route::get('/logout',[AuthenticationController::class,'logout']);
 
@@ -37,5 +39,7 @@ Route::get('admin-dashboard/add-Villas',[VillaController::class,'addvillas']);
 Route::post('admin-dashboard/addVillasProc',[VillaController::class,'addProcc'])->name('addVillasProc');
 
 Route::get('admin-dashboard/villas/{slug}',[VillaController::class,'villaView']);
+Route::get('admin-dashboard/villas/delete/{id}',[VillaController::class,'delete']);
+Route::post('admin-dashboard/villas/update',[VillaController::class,'update']);
 
 });

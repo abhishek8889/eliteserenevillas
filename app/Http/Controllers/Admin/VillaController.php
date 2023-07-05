@@ -75,7 +75,48 @@ class VillaController extends Controller
       }
    }
    public function villaView($slug){
-
-         return view('Admin.villas.villaview');
+         $villas = Villas::where('slug',$slug)->with('address','media')->first();
+      
+         return view('Admin.villas.villaview',compact('villas'));
    }
+   public function delete($id){
+      $villas = Villas::find($id);
+      if($villas){
+         $villas->delete();
+         return redirect('admin-dashboard/villas')->with('success','Success!Villas deleted successfully');
+      }else{
+         return redirect()->back()->with('error','Failed to delete!something went wrong');
+      }
+   }
+   public function update(Request $request){
+      if($request->val){
+      $slug = strtolower(str_replace(" ","-",$request->val));
+      $update = Villas::find($request->id);
+      $update->name = $request->val;
+      $update->slug = $slug;
+      $update->update();
+      return response()->json('successfully updated villas name');
+      }
+      elseif($request->image_id){
+         $media = Media::find($request->image_id);
+         if($request->hasFile('file')){
+            ///////
+         }
+      }else{
+        $request->validate([
+         'street' => 'required',
+         'city' => 'required',
+         'state' => 'required',
+         'country_name' => 'required',
+        ]);
+        $update = Address::find($request->id);
+        $update->street_name = $request->street;
+        $update->city = $request->city;
+        $update->state = $request->state;
+        $update->country = $request->country_name;
+        $update->update();
+        return response()->json($update);
+      }
+   }
+
 }

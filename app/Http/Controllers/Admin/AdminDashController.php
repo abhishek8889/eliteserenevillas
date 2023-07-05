@@ -23,9 +23,9 @@ class AdminDashController extends Controller
     }
     public function importproc(Request $request){
       // print_r($request->all());
-      $request->validate([
-        'file' => 'required|mimes:ics',
-      ]);
+      // $request->validate([
+      //   'file' => 'required|mimes:ics',
+      // ]);
       if($request->hasFile('file')){
         $file = $request->file('file');
          $name = 'listing_'.time().rand(1,1000).'.'.$file->getClientOriginalExtension();

@@ -71,7 +71,7 @@
                             <label class="form-label" for="customMultipleFilesLabel">Upload Images</label>
                             <div class="form-control-wrap">
                                 <div class="form-file">
-                                    <input type="file" class="form-file-input" name="images[]" id="customMultipleFiles">
+                                    <input type="file" multiple class="form-file-input" name="images[]" id="customMultipleFiles">
                                     <label class="form-file-label" for="customMultipleFiles">Choose files</label>
                                 </div>
                             </div>
