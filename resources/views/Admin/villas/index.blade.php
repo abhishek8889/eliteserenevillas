@@ -65,8 +65,8 @@
                                                                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                                                         <ul class="link-list-plain">
                                                                             <li><a href="{{ url('admin-dashboard/villas/'.$v->slug) }}">View</a></li>
-                                                                            <li><a href="#">Edit</a></li>
-                                                                            <li><a href="#">Export</a></li>
+                                                                            <!-- <li><a href="#">Edit</a></li>
+                                                                            <li><a href="#">Export</a></li> -->
                                                                         </ul>
                                                                     </div>
                                                                 </div>
