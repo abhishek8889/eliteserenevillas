@@ -22,6 +22,9 @@ use App\Http\Controllers\Admin\VillaController;
 Route::get('/' ,function(){
     return view('welcome');
 });
+Route::get('/test-new',function(){
+    return "hello buddy this is test";
+});
 Route::get('/admin-login',[AuthenticationController::class,'index']);
 Route::post('/loginprocc',[AuthenticationController::class,'loginProcc']);
 Route::get('/logout',[AuthenticationController::class,'logout']);
