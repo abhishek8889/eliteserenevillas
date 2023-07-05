@@ -41,5 +41,5 @@ Route::post('admin-dashboard/addVillasProc',[VillaController::class,'addProcc'])
 Route::get('admin-dashboard/villas/{slug}',[VillaController::class,'villaView']);
 Route::get('admin-dashboard/villas/delete/{id}',[VillaController::class,'delete']);
 Route::post('admin-dashboard/villas/update',[VillaController::class,'update']);
-
+Route::post('admin-dashboard/villas/remove-image', [VillaController::class,'removeImage']);
 });
