@@ -1,38 +1,18 @@
 @extends('admin_layout/index')
 @section('content')
 
-
-            <!-- <div class="card card-bordered card-preview">
-                <div class="card-inner">
-                    <div class="preview-block">
-                        <div class="row gy-4">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="form-label">Default File Upload</label>
-                                    <form action="{{ route('importproc') }}" method="post" enctype="multipart/form-data">
-                                    @csrf   
-                                    <div class="form-control-wrap">
-                                            <div class="form-file">
-                                                <input type="file" name="file" class="form-file-input" id="customFile">
-                                                <label class="form-file-label" for="customFile">Choose file</label>
-                                                @if ($errors->has('file'))
-                                            <span class="text-danger">{{ $errors->first('file') }}</span>
-                                                @endif
-                                            </div>
-                                            <div class="form-group mt-2">
-                                               <button type="submit" class="btn btn-primary">Upload</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+<style>
+.fc-icon-left-single-arrow:after{
+    top: -90% !important;
+}
+.fc-icon-right-single-arrow:after{
+    top: -90% !important;
+}
+</style>
+            
             <div class="nk-block">
                                     <div class="card card-bordered">
-            <h2 class="text-end" data-bs-toggle="modal" data-bs-target="#modalDefault"><em class="icon ni ni-edit"></em></h2>
+            <h2 class="text-end" data-bs-toggle="modal" data-bs-target="#modalDefault123"><em class="icon ni ni-edit"></em></h2>
                                         <div class="card-inner">
                                             <div class="row pb-5">
                                                 <div class="col-lg-6">
@@ -57,17 +37,7 @@
                                                     </div><!-- .product-gallery -->
                                                 </div><!-- .col -->
                                                 <div class="col-lg-6">
-                                                <div class="product-meta">
-                                                            <ul class="d-flex flex-wrap ailgn-center g-2 pt-1">
-                                                                <li>
-                                                                   <a href="#"> <button class="btn btn-primary">Import</button></a>
-                                                                </li>
-                                                                <li>
-                                                                   <a href="#"> <button class="btn btn-primary">Export</button></a>
-                                                                </li>
-                                                              
-                                                            </ul>
-                                                        </div>
+                                               
                                                     <div class="product-info mt-5 me-xxl-5">
                                                         <h2 class="product-title"><span id="villa_name">{{ $villas->name ?? '' }} </span><sup><span id="edit"><em class="icon ni ni-edit"></em></span></sup></h2>
                                                         <input type="text" name="name" data-id="{{ $villas->id ?? '' }}" id="edit_form" class="form-control" value="{{ $villas->name ?? '' }}" style="display:none;">
@@ -121,12 +91,12 @@
                                                 </div><!-- .col -->
                                             </div><!-- .row -->
                                         <!-- start pricing -->
-                                        <div class="nk-block-head d-flex justify-content-between">
+                                        <div class="nk-block-head  d-flex justify-content-between">
                                             <div class="nk-block-head-content">
                                                 <h4 class="nk-block-title">Pricing List</h4>
                                             </div>
                                             <div class="nk-block-head-content">
-                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDefault">Add new</button>
+                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDefault" id="Add-new">Add new</button>
                                             </div>
                                         </div>
                                         <!-- pricing modal -->
@@ -142,18 +112,21 @@
                                                         <div class="modal-body">
                                                         <div class="card card-bordered h-100">
                                                     <div class="card-inner">
-                                                        <form action="#">
+                                                        <form action="{{ url('admin-dashboard/pricing') }}" id="price_form" method="post">
+                                                            @csrf
+                                                            <input type="hidden" id="id" value="">
+                                                            <input type="hidden" name="villa_id" value="{{ $villas->id ?? '' }}">
                                                             <div class="form-group">
-                                                                <label class="form-label" for="cf-full-name">Price per day</label>
-                                                                <input type="text" class="form-control" id="cf-full-name">
+                                                                <label class="form-label" for="price">Price per day</label>
+                                                                <input type="text" class="form-control" name="price" id="price">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="form-label" for="cf-email-address">From date</label>
-                                                                <input type="text" class="form-control" id="cf-email-address">
+                                                                <label class="form-label" for="from">From date</label>
+                                                                <input type="date" class="form-control" name="from_date" id="from">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="form-label" for="cf-phone-no">To Date</label>
-                                                                <input type="text" class="form-control" id="cf-phone-no">
+                                                                <label class="form-label" for="to">To Date</label>
+                                                                <input type="date" class="form-control" name="to_date" id="to">
                                                             </div>
                                                             <div class="form-group">
                                                             <button type="submit" class="btn btn-md btn-primary">Save Pricing</button>
@@ -168,19 +141,17 @@
                                                 </div>
                                         </div>
                                             <!-- pricing modal end -->
-                                            <div class="row pb-5">
+                                            <div class="row pb-5" style="max-height:250px; overflow:auto;">
                                             <table class="table table-tranx">
                                                 <thead>
                                                     <tr class="tb-tnx-head">
-                                                        <th class="tb-tnx-id"><span class="">#</span></th>
+                                                        <th class="tb-tnx-id is-alt"><span class="">#</span></th>
                                                         <th class="tb-tnx-amount is-alt">
                                                             <span class="tb-tnx-total">Price</span>
                                                         </th>
+                                                      
                                                         <th class="tb-tnx-amount is-alt">
-                                                            <span class="tb-tnx-total">From Date</span>
-                                                        </th>
-                                                        <th class="tb-tnx-amount is-alt">
-                                                            <span class="tb-tnx-total">To Date</span>
+                                                            <span class="tb-tnx-total">Date</span>
                                                         </th>
                                                         <th class="tb-tnx-action">
                                                             <span>&nbsp;</span>
@@ -188,40 +159,40 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <?php  $num = 1; ?>
+                                                    @foreach($villas_pricing as $vp)
                                                     <tr class="tb-tnx-item">
                                                         <td class="tb-tnx-id">
-                                                            <a href="#"><span>1</span></a>
+                                                            <a ><span>{{ $num++ }}</span></a>
                                                         </td>
                                                         <td class="tb-tnx-id">
-                                                            <a href="#"><span> $50</span></a>
-                                                        </td><td class="tb-tnx-id">
-                                                            <a href="#"><span> 10-05-2019</span></a>
-                                                        </td><td class="tb-tnx-id">
-                                                            <a href="#"><span> 10-05-2019</span></a>
+                                                            <a ><span> ${{ number_format($vp->price,2) ?? '' }}</span></a>
+                                                        </td>
+                                                        <td class="tb-tnx-id">
+                                                            <a ><span> {{ $vp->date ?? '' }} </span></a>
+                                                        </td>
                                                             <td class="tb-tnx-action">
                                                             <div class="dropdown">
                                                                 <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false"><em class="icon ni ni-more-h"></em></a>
                                                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
                                                                     <ul class="link-list-plain">
-                                                                        <li><a href="#">View</a></li>
-                                                                        <li><a href="#">Edit</a></li>
-                                                                        <li><a href="#">Remove</a></li>
+                                                                        <li><a price="{{ $vp->price ?? '' }}" class="edit_pricing" date="{{ $vp->date ?? '' }}" data-id="{{ $vp->id ?? ''}}" href="#" data-bs-toggle="modal" data-bs-target="#modalDefault">Edit</a></li>
+                                                                        <li><a class="pricing_remove" link="{{ url('admin-dashboard/pricing/'.$vp->id) }}">Remove</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                     </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                             </div>
-
-                                            
                                             </div><!-- .row -->
                                             <!-- endpricing -->
                                         </div>
                                     </div>
                                 </div>
-                            <div class="modal fade" tabindex="-1" id="modalDefault">
+                            <div class="modal fade" tabindex="-1" id="modalDefault123">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -263,22 +234,73 @@
                                     </div>
                                 </div>
                             </div>
-                        <div>
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <button class="btn">import</button><br>
-                                    <span>(required only .ics file)</span>
-                                </div>
-                                <div>
-                                <button class="btn">Export</button><br>
-                                <span>(for download .ics file)</span>
-                                </div>
-                            </div>
-                        
-                        </div>
-                        <div class="container">
+                       
+                        <div class="container"  style="background-color:white; padding:10px;">
+                        <div class="nk-block-head">
+                                            <div class="nk-block-head-content d-flex justify-content-between">
+                                                <h4 class="title nk-block-title">Calendar</h4>
+                                                <div class="nk-block-des">
+                                                <div class="dropdown">
+                                                                <a class="text-soft dropdown-toggle btn btn-primary " data-bs-toggle="dropdown" aria-expanded="false">Action</a>
+                                                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
+                                                                    <ul class="link-list-plain">
+                                                                        <li><a data-bs-toggle="modal" data-bs-target="#importModal">Import</a></li>
+                                                                        <li><a href="#"  data-bs-toggle="tooltip" data-bs-placement="top" title="(download ics file)">Export</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                </div>
+                                            </div>
+                           </div>
                              <div id='calendar'></div>
                         </div>
+                        <!-- import modal -->
+                        <div class="modal fade" tabindex="-1" id="importModal">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <em class="icon ni ni-cross"></em>
+                                            </a>
+                                            <div class="modal-header">
+                                                Import Event
+                                            </div>
+                                            <div class="modal-body">
+                                            <div class="card card-bordered card-preview">
+                                                        <div class="card-inner">
+                                                            <div class="preview-block">
+                                                                <div class="row gy-4">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label">Default File Upload</label>
+                                                                            <form action="{{ route('importproc') }}" method="post" enctype="multipart/form-data">
+                                                                            @csrf   
+                                                                            <div class="form-control-wrap">
+                                                                                    <div class="form-file">
+                                                                                        <input type="hidden" name ="villa_id" value="{{ $villas->id }}">
+                                                                                        <input type="file" name="file" class="form-file-input" id="customFile">
+                                                                                        <label class="form-file-label" for="customFile">Choose file</label>
+                                                                                        @if ($errors->has('file'))
+                                                                                    <span class="text-danger">{{ $errors->first('file') }}</span>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                    <div class="form-group mt-2">
+                                                                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                            </div>
+                                            <div class="modal-footer bg-light">
+                                                <!-- <span class="sub-text">Modal Footer Text</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
 <script>
     $(document).ready(function(){
@@ -346,12 +368,15 @@ $('.file_upload').change(function(){
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
   <script>
 var calendar = $('#calendar').fullCalendar({
-    displayEventEnd: true,
+    displayEventEnd: false,
+    displayEventStart: false,
+
     header:{
      left:'prev,next today',
      center:'title',
      right:'month'
     },
+    events: "{{ url('admin-dashboard/calendar/'.$villas->id) }}",
     eventRender: function (event, element, view) {
         if (event.allDay === 'true') {
                 event.allDay = true;
@@ -361,15 +386,63 @@ var calendar = $('#calendar').fullCalendar({
       },
     selectable:true,
     selectHelper:true,
+
     select: function(start, end, allDay)
     {
         console.log(start._d);
         console.log(end._d);
-
     }
-
-
 });
+  </script>
+
+  <script>
+    $(document).ready(function(){
+        $('.edit_pricing').click(function(e){
+            e.preventDefault();
+            let price = $(this).attr('price');
+            let id = $(this).attr('data-id');
+            let date = $(this).attr('date');
+            $('#to').val(date);
+            $('#from').val(date);
+            $('#id').val(id);
+            $('#price').val(price);
+        });
+
+        $('#Add-new').click(function(){
+            $('#to').val("");
+            $('#from').val("");
+            $('#price').val("");
+        });
+    });
+    $('.pricing_remove').click(function(){
+        link = $(this).attr('link');
+        Swal.fire({
+           title: 'Do you want to delete this pricing ?',
+           showCancelButton: true,
+           confirmButtonText: 'yes',
+           confirmButtonColor: '#008000',
+           cancelButtonText: 'no',
+           cancelButtonColor: '#d33',
+         }).then((result) => {
+           if (result.isConfirmed) {
+             window.location.href = link;
+           } 
+         });  
+    });
+    $('#price_form').on('submit',function(){
+        to = $('#to').val();
+        from = $('#from').val();
+        if(from > to){
+            Swal.fire({
+           title: 'To date must be greater than from date',
+           icon: "error",
+           confirmButtonText: 'ok',
+           confirmButtonColor: '#008000',
+           
+         })
+            return false;
+        }
+    })
   </script>
   
 

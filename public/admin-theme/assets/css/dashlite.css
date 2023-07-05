@@ -41503,6 +41503,7 @@ body.dark-mode.nk-body.ui-softy, body.dark-mode.nk-body.ui-shady {
   border-color: #6576ff !important;
 }
 .middle h1 {
+font-weight: bolder;
   font-size: 5vh;
   color: #88a1c2;
 }

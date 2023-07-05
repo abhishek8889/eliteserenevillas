@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Sabre\VObject\Reader;
 use League\Csv\Writer;
 use Storage;
+use App\Models\Event;
+use Auth;
+use DateTime;
 
 
 class AdminDashController extends Controller
@@ -37,20 +40,21 @@ class AdminDashController extends Controller
         $count = 0;
         foreach($events as $ev){
             $summary = $ev->SUMMARY;
-            $startDate = $ev->DTSTART;
-            $endDate = $ev->DTEND;
+            $startDate = date('Y-m-d', strtotime($ev->DTSTART));
+            $endDate = date('Y-m-d', strtotime($ev->DTEND));
             $description = $ev->DESCRIPTION;
             $uid = $ev->UID;
 
-            // Do something with the extracted data
-            echo '<pre>';
-            echo "Event: $summary\n";
-            echo "Start Date: $startDate\n";
-            echo "End Date: $endDate\n";
-            echo "description: $description\n";
-            echo "UID: $uid\n";
-            echo '</pre>';
+            $event = new Event;
+            $event->event = $summary;
+            $event->start = $startDate;
+            $event->end = $endDate;
+            $event->descirption = $description;
+            $event->uid = $uid;
+            $event->villa_id = $request->villa_id;
+            $event->save();
           }   
+          return redirect()->back()->with('success','successfully imported data');
     }
     public function export(){
       $file_path = public_path("icsfiles/listing-53876125.ics");
