@@ -41502,5 +41502,14 @@ body.dark-mode.nk-body.ui-softy, body.dark-mode.nk-body.ui-shady {
   background-color: #6576ff !important;
   border-color: #6576ff !important;
 }
+.middle h1 {
+  font-size: 5vh;
+  color: #88a1c2;
+}
+.middle-logo h1{
+  font-size: 3vh;
+  color: #88a1c2;
+
+}
 
 /*! END @iO */

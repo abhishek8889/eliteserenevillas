@@ -120,8 +120,104 @@
                                                     </div><!-- .product-info -->
                                                 </div><!-- .col -->
                                             </div><!-- .row -->
+                                        <!-- start pricing -->
+                                        <div class="nk-block-head d-flex justify-content-between">
+                                            <div class="nk-block-head-content">
+                                                <h4 class="nk-block-title">Pricing List</h4>
+                                            </div>
+                                            <div class="nk-block-head-content">
+                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDefault">Add new</button>
+                                            </div>
+                                        </div>
+                                        <!-- pricing modal -->
+                                        <div class="modal fade" tabindex="-1" id="modalDefault">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                            <em class="icon ni ni-cross"></em>
+                                                        </a>
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Add new Pricing</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        <div class="card card-bordered h-100">
+                                                    <div class="card-inner">
+                                                        <form action="#">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="cf-full-name">Price per day</label>
+                                                                <input type="text" class="form-control" id="cf-full-name">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="cf-email-address">From date</label>
+                                                                <input type="text" class="form-control" id="cf-email-address">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="cf-phone-no">To Date</label>
+                                                                <input type="text" class="form-control" id="cf-phone-no">
+                                                            </div>
+                                                            <div class="form-group">
+                                                            <button type="submit" class="btn btn-md btn-primary">Save Pricing</button>
+                                                            </div>
+                                                           
+                                                        </form>
+                                                    </div>
+                                                </div>       
+                                                    </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                        </div>
+                                            <!-- pricing modal end -->
+                                            <div class="row pb-5">
+                                            <table class="table table-tranx">
+                                                <thead>
+                                                    <tr class="tb-tnx-head">
+                                                        <th class="tb-tnx-id"><span class="">#</span></th>
+                                                        <th class="tb-tnx-amount is-alt">
+                                                            <span class="tb-tnx-total">Price</span>
+                                                        </th>
+                                                        <th class="tb-tnx-amount is-alt">
+                                                            <span class="tb-tnx-total">From Date</span>
+                                                        </th>
+                                                        <th class="tb-tnx-amount is-alt">
+                                                            <span class="tb-tnx-total">To Date</span>
+                                                        </th>
+                                                        <th class="tb-tnx-action">
+                                                            <span>&nbsp;</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="tb-tnx-item">
+                                                        <td class="tb-tnx-id">
+                                                            <a href="#"><span>1</span></a>
+                                                        </td>
+                                                        <td class="tb-tnx-id">
+                                                            <a href="#"><span> $50</span></a>
+                                                        </td><td class="tb-tnx-id">
+                                                            <a href="#"><span> 10-05-2019</span></a>
+                                                        </td><td class="tb-tnx-id">
+                                                            <a href="#"><span> 10-05-2019</span></a>
+                                                            <td class="tb-tnx-action">
+                                                            <div class="dropdown">
+                                                                <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" aria-expanded="false"><em class="icon ni ni-more-h"></em></a>
+                                                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
+                                                                    <ul class="link-list-plain">
+                                                                        <li><a href="#">View</a></li>
+                                                                        <li><a href="#">Edit</a></li>
+                                                                        <li><a href="#">Remove</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            </div>
+
                                             
                                             </div><!-- .row -->
+                                            <!-- endpricing -->
                                         </div>
                                     </div>
                                 </div>
@@ -167,8 +263,22 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div id='calendar'></div>
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <button class="btn">import</button><br>
+                                    <span>(required only .ics file)</span>
+                                </div>
+                                <div>
+                                <button class="btn">Export</button><br>
+                                <span>(for download .ics file)</span>
+                                </div>
+                            </div>
+                        
+                        </div>
+                        <div class="container">
+                             <div id='calendar'></div>
+                        </div>
 
 <script>
     $(document).ready(function(){
@@ -229,7 +339,7 @@ $('.file_upload').change(function(){
     $('#media_form').submit();
 })
 </script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>

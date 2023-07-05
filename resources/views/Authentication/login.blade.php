@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="{{ asset('admin-theme/assets/css/dashlite.css')}}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css') }}">
 </head>
+<style>
+
+</style>
 
 <body class="nk-body bg-white npc-general pg-auth">
     <div class="nk-app-root">
@@ -27,8 +30,11 @@
                     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
                         <div class="brand-logo pb-4 text-center">
                             <a href="html/index.html" class="logo-link">
-                                <img class="logo-light logo-img logo-img-lg" src="{{('admin-theme/images/logo.png')}}" srcset="./images/logo2x.png 2x" alt="logo">
-                                <img class="logo-dark logo-img logo-img-lg" src="{{asset('admin-theme/images/logo-dark.png')}}" srcset="./images/logo-dark2x.png 2x" alt="logo-dark">
+                                <!-- <img class="logo-light logo-img logo-img-lg" src="{{('admin-theme/images/logo.png')}}" srcset="./images/logo2x.png 2x" alt="logo">
+                                <img class="logo-dark logo-img logo-img-lg" src="{{asset('admin-theme/images/logo-dark.png')}}" srcset="./images/logo-dark2x.png 2x" alt="logo-dark"> -->
+                                <div class="middle">
+                                    <h1>Elite Serene Villas</h1>
+                                </div>
                             </a>
                         </div>
                         <div class="card card-bordered">
