@@ -167,6 +167,9 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div id='calendar'></div>
+
 <script>
     $(document).ready(function(){
         // $('#edit_form').hide();
@@ -226,5 +229,39 @@ $('.file_upload').change(function(){
     $('#media_form').submit();
 })
 </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+  <script>
+var calendar = $('#calendar').fullCalendar({
+    displayEventEnd: true,
+    header:{
+     left:'prev,next today',
+     center:'title',
+     right:'month'
+    },
+    eventRender: function (event, element, view) {
+        if (event.allDay === 'true') {
+                event.allDay = true;
+        } else {
+                event.allDay = false;
+        }
+      },
+    selectable:true,
+    selectHelper:true,
+    select: function(start, end, allDay)
+    {
+        console.log(start._d);
+        console.log(end._d);
+
+    }
+
+
+});
+  </script>
+  
+
 
 @endsection

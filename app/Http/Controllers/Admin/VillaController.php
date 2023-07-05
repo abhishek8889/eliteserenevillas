@@ -27,7 +27,7 @@ class VillaController extends Controller
          'city' => 'required',
          'state' => 'required',
          'country_name' => 'required',
-         'images' => 'mimes:jpg,png,jpeg,webp',
+         // 'images' => 'mimes:jpg,png,jpeg,webp',
       ]);
 
       $villas = new Villas;
