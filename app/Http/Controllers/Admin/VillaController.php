@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Villas;
 use App\Models\Address;
 use App\Models\Media;
+use App\Models\Pricing;
+use App\Models\Event;
 use Auth;
 use DB;
 use Illuminate\Support\Facades\File;
@@ -77,8 +79,9 @@ class VillaController extends Controller
    }
    public function villaView($slug){
          $villas = Villas::where('slug',$slug)->with('address','media')->first();
+         $villas_pricing = Pricing::where('villa_id',$villas->id)->get();
       
-         return view('Admin.villas.villaview',compact('villas'));
+         return view('Admin.villas.villaview',compact('villas','villas_pricing'));
    }
    public function delete($id){
       $villas = Villas::find($id);
@@ -137,6 +140,21 @@ class VillaController extends Controller
         return response()->json($update);
       }
    }
+   public function calendar($id){
+      $events = Event::where('villa_id',$id)->get();
+      foreach($events as $event){
+      $data[] =  array(
+         'id'       => $event->id,
+         'title'    =>  $event->event,
+         'start'    =>  $event->start,
+         'end'      =>  $event->end,
+         'status'   =>  '1',
+         'color'    =>  '#6294a7',
+         'allDay'   =>  false,
+     );
+   }
+      return response()->json($data);
+}
 
    // Remove Image function 
    public function removeImage(Request $request){
@@ -154,4 +172,6 @@ class VillaController extends Controller
       return response()->json(true);
    }
 
-}
+
+   }
+   

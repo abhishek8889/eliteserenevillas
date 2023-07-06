@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authentication\AuthenticationController;
 use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Admin\VillaController;
+use App\Http\Controllers\Admin\PricingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,4 +43,9 @@ Route::get('admin-dashboard/villas/{slug}',[VillaController::class,'villaView'])
 Route::get('admin-dashboard/villas/delete/{id}',[VillaController::class,'delete']);
 Route::post('admin-dashboard/villas/update',[VillaController::class,'update']);
 Route::post('admin-dashboard/villas/remove-image', [VillaController::class,'removeImage']);
+
+Route::post('admin-dashboard/pricing',[PricingController::class,'pricingAdd']);
+Route::get('admin-dashboard/pricing/{id}',[PricingController::class,'delete']);
+Route::get('admin-dashboard/calendar/{id}',[VillaController::class,'calendar']);
+
 });

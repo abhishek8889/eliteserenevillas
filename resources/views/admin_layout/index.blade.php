@@ -71,14 +71,12 @@
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="{{url('/admin-dashboard/villas')}}" class="nk-menu-link"><span class="nk-menu-text">List</span></a>
+                                            <a href="{{url('/admin-dashboard/villas')}}" class="nk-menu-link"><span class="nk-menu-text">Listing List</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{url('/admin-dashboard/add-Villas')}}" class="nk-menu-link"><span class="nk-menu-text">Add New</span></a>
+                                            <a href="{{url('/admin-dashboard/add-Villas')}}" class="nk-menu-link"><span class="nk-menu-text">Add Listing</span></a>
                                         </li>
-                                        <li class="nk-menu-item">
-                                            <a href="{{url('/admin-dashboard/add-Villas')}}" class="nk-menu-link"><span class="nk-menu-text">Edit</span></a>
-                                        </li>
+                                       
                                     </ul>
                                 </li>
                                 <!-- <li class="nk-menu-item has-sub">
@@ -270,7 +268,7 @@
         </div>
     </div>
     <!-- JavaScript -->
- 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>
     <script src="{{ asset('admin-theme/assets/js/scripts.js?ver=3.1.2') }}"></script>
     <script src="{{ asset('admin-theme/assets/js/charts/gd-default.js?ver=3.1.2') }}"></script>

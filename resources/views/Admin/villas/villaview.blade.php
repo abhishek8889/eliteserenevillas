@@ -442,25 +442,73 @@ label{
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
+                       
+                        <div class="container"  style="background-color:white; padding:10px;">
+                        <div class="nk-block-head">
+                                            <div class="nk-block-head-content d-flex justify-content-between">
+                                                <h4 class="title nk-block-title">Calendar</h4>
+                                                <div class="nk-block-des">
+                                                <div class="dropdown">
+                                                                <a class="text-soft dropdown-toggle btn btn-primary " data-bs-toggle="dropdown" aria-expanded="false">Action</a>
+                                                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
+                                                                    <ul class="link-list-plain">
+                                                                        <li><a data-bs-toggle="modal" data-bs-target="#importModal">Import</a></li>
+                                                                        <li><a href="#"  data-bs-toggle="tooltip" data-bs-placement="top" title="(download ics file)">Export</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                </div>
+                                            </div>
+                           </div>
+                             <div id='calendar'></div>
                         </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<div>
-    <div class="d-flex justify-content-between">
-        <div>
-            <button class="btn">import</button><br>
-            <span>(required only .ics file)</span>
-        </div>
-        <div>
-            <button class="btn">Export</button><br>
-            <span>(for download .ics file)</span>
-        </div>
-    </div>
+                        <!-- import modal -->
+                        <div class="modal fade" tabindex="-1" id="importModal">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <em class="icon ni ni-cross"></em>
+                                            </a>
+                                            <div class="modal-header">
+                                                Import Event
+                                            </div>
+                                            <div class="modal-body">
+                                            <div class="card card-bordered card-preview">
+                                                        <div class="card-inner">
+                                                            <div class="preview-block">
+                                                                <div class="row gy-4">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label">Default File Upload</label>
+                                                                            <form action="{{ route('importproc') }}" method="post" enctype="multipart/form-data">
+                                                                            @csrf   
+                                                                            <div class="form-control-wrap">
+                                                                                    <div class="form-file">
+                                                                                        <input type="hidden" name ="villa_id" value="{{ $villas->id }}">
+                                                                                        <input type="file" name="file" class="form-file-input" id="customFile">
+                                                                                        <label class="form-file-label" for="customFile">Choose file</label>
+                                                                                        @if ($errors->has('file'))
+                                                                                    <span class="text-danger">{{ $errors->first('file') }}</span>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                    <div class="form-group mt-2">
+                                                                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                            </div>
+                                            <div class="modal-footer bg-light">
+                                                <!-- <span class="sub-text">Modal Footer Text</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
 </div>
 <div class="container">
@@ -662,31 +710,81 @@ $('.file_upload').change(function() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 <script>
 var calendar = $('#calendar').fullCalendar({
-    displayEventEnd: true,
-    header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month'
+    displayEventEnd: false,
+    displayEventStart: false,
+
+    header:{
+     left:'prev,next today',
+     center:'title',
+     right:'month'
     },
-    eventRender: function(event, element, view) {
+    events: "{{ url('admin-dashboard/calendar/'.$villas->id) }}",
+    eventRender: function (event, element, view) {
         if (event.allDay === 'true') {
             event.allDay = true;
         } else {
             event.allDay = false;
         }
-    },
-    selectable: true,
-    selectHelper: true,
-    select: function(start, end, allDay) {
+      },
+    selectable:true,
+    selectHelper:true,
+
+    select: function(start, end, allDay)
+    {
         console.log(start._d);
         console.log(end._d);
-
     }
-
-
 });
-</script>
+  </script>
 
+  <script>
+    $(document).ready(function(){
+        $('.edit_pricing').click(function(e){
+            e.preventDefault();
+            let price = $(this).attr('price');
+            let id = $(this).attr('data-id');
+            let date = $(this).attr('date');
+            $('#to').val(date);
+            $('#from').val(date);
+            $('#id').val(id);
+            $('#price').val(price);
+        });
 
+        $('#Add-new').click(function(){
+            $('#to').val("");
+            $('#from').val("");
+            $('#price').val("");
+        });
+    });
+    $('.pricing_remove').click(function(){
+        link = $(this).attr('link');
+        Swal.fire({
+           title: 'Do you want to delete this pricing ?',
+           showCancelButton: true,
+           confirmButtonText: 'yes',
+           confirmButtonColor: '#008000',
+           cancelButtonText: 'no',
+           cancelButtonColor: '#d33',
+         }).then((result) => {
+           if (result.isConfirmed) {
+             window.location.href = link;
+           } 
+         });  
+    });
+    $('#price_form').on('submit',function(){
+        to = $('#to').val();
+        from = $('#from').val();
+        if(from > to){
+            Swal.fire({
+           title: 'To date must be greater than from date',
+           icon: "error",
+           confirmButtonText: 'ok',
+           confirmButtonColor: '#008000',
+           
+         });
+            return false;
+        }
+    });
+  </script>
+  @endsection
 
-@endsection
