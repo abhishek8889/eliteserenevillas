@@ -7,7 +7,7 @@ use App\Models\Villas;
 use App\Models\Address;
 use App\Models\Media;
 use App\Models\Pricing;
-use App\Models\Event;
+use App\Models\Reservation;
 use Auth;
 use DB;
 use Illuminate\Support\Facades\File;
@@ -30,7 +30,7 @@ class VillaController extends Controller
          'city' => 'required',
          'state' => 'required',
          'country_name' => 'required',
-         'images' => 'required|image',
+         // 'images' => '',
       ]);
 
       $villas = new Villas;
@@ -141,12 +141,12 @@ class VillaController extends Controller
       }
    }
    public function calendar($id){
-      $events = Event::where('villa_id',$id)->get();
+      $events = Reservation::where('villa_id',$id)->get();
      $data = array();
       foreach($events as $event){
       $data[] =  array(
          'id'       => $event->id,
-         'title'    =>  $event->event,
+         'title'    =>  $event->title,
          'start'    =>  $event->start,
          'end'      =>  $event->end,
          'status'   =>  '1',

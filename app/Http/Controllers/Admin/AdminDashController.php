@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Sabre\VObject\Reader;
 use League\Csv\Writer;
 use Storage;
-use App\Models\Event;
+use App\Models\Reservation;
 use Auth;
 use DateTime;
 
@@ -44,8 +44,8 @@ class AdminDashController extends Controller
             $endDate = date('Y-m-d', strtotime($ev->DTEND));
             $description = str_replace("\n"," ",$ev->DESCRIPTION);
             $uid = $ev->UID;
-            $event = new Event;
-            $event->event = $summary;
+            $event = new Reservation;
+            $event->title = $summary;
             $event->start = $startDate;
             $event->end = $endDate;
             $event->descirption = $description;
@@ -58,7 +58,7 @@ class AdminDashController extends Controller
     public function export($id){
       $file_name = 'listing-53876125.ics';
       $file_path = public_path("icsfiles/listing-53876125.ics");
-      $events = Event::where('villa_id',$id)->get();
+      $events = Reservation::where('villa_id',$id)->get();
       $new_data_ics = [];
       $new_data_ics[0]  = "BEGIN:VCALENDAR";
       $new_data_ics[1] = "PRODID;X-RICAL-TZSOURCE=TZINFO:-//Airbnb Inc//Hosting Calendar 0.8.8//EN";
@@ -79,7 +79,7 @@ class AdminDashController extends Controller
         }else{
           $new_data_ics[] = "DESCRIPTION:$ev->descirption";
         }
-        $new_data_ics[] = "SUMMARY:$ev->event";
+        $new_data_ics[] = "SUMMARY:$ev->title";
         $new_data_ics[] = "END:VEVENT";
       }
       $new_data_ics[] = "END:VCALENDAR";

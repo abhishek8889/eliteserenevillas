@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->string('event');
+            $table->string('title');
             $table->string('descirption')->nullable();
             $table->string('start');
             $table->string('end');
