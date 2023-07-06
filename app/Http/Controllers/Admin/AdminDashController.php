@@ -26,9 +26,6 @@ class AdminDashController extends Controller
     }
     public function importproc(Request $request){
       // print_r($request->all());
-      // $request->validate([
-      //   'file' => 'required|mimes:text/calendar',
-      // ]);
       if($request->hasFile('file')){
         $file = $request->file('file');
         if($file->getClientOriginalExtension() !== 'ics'){

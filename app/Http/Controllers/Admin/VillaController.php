@@ -8,6 +8,7 @@ use App\Models\Address;
 use App\Models\Media;
 use App\Models\Pricing;
 use App\Models\Reservation;
+use App\Models\Amenities;
 use Auth;
 use DB;
 use Illuminate\Support\Facades\File;
@@ -20,6 +21,8 @@ class VillaController extends Controller
    }
    public function addvillas(){
 
+      $amenities = Amenities::get();
+      dd($amenities);
     return view('Admin.villas.addvillas');
    }
    public function addProcc(Request $request){

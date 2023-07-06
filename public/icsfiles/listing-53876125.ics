@@ -7,40 +7,35 @@ BEGIN:VEVENT
 DTSTART;VALUE=DATE:20230710
 DTEND;VALUE=DATE:20230714
 UID:1418fb94e984-dd6497a4f0cc73429c9542a714e639a9@airbnb.com
-DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HMJW54KHW9
-Phone Number (Last 4 Digits): 7336
+DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HMJW54KHW9 Phone Number (Last 4 Digits): 7336
 SUMMARY:Reserved
 END:VEVENT
 BEGIN:VEVENT
 DTSTART;VALUE=DATE:20230718
 DTEND;VALUE=DATE:20230722
 UID:1418fb94e984-ba6c7456a01e684e085cdc117d8d4ef9@airbnb.com
-DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HM44DNSADA
-Phone Number (Last 4 Digits): 6738
+DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HM44DNSADA Phone Number (Last 4 Digits): 6738
 SUMMARY:Reserved
 END:VEVENT
 BEGIN:VEVENT
 DTSTART;VALUE=DATE:20230805
 DTEND;VALUE=DATE:20230806
 UID:1418fb94e984-d361588419fac5f16806cbbe41b7c12a@airbnb.com
-DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HMRQJD4CHQ
-Phone Number (Last 4 Digits): 7857
+DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HMRQJD4CHQ Phone Number (Last 4 Digits): 7857
 SUMMARY:Reserved
 END:VEVENT
 BEGIN:VEVENT
 DTSTART;VALUE=DATE:20230813
 DTEND;VALUE=DATE:20230814
 UID:1418fb94e984-8fba71f6d518ad0cb902d46fb57c1e76@airbnb.com
-DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HMCYCZZ9QE
-Phone Number (Last 4 Digits): 4268
+DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HMCYCZZ9QE Phone Number (Last 4 Digits): 4268
 SUMMARY:Reserved
 END:VEVENT
 BEGIN:VEVENT
 DTSTART;VALUE=DATE:20230913
 DTEND;VALUE=DATE:20230917
 UID:1418fb94e984-ef699f43502cb88a4fe93fe166414f08@airbnb.com
-DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HM2APT2MN9
-Phone Number (Last 4 Digits): 1797
+DESCRIPTION:Reservation URL: https://www.airbnb.com/hosting/reservations/details/HM2APT2MN9 Phone Number (Last 4 Digits): 1797
 SUMMARY:Reserved
 END:VEVENT
 BEGIN:VEVENT
