@@ -143,13 +143,15 @@ class VillaController extends Controller
       // return  response()->json($request->all());
       $mediaImage = Media::find($request->media_id);
       $image_path = $mediaImage->media_url;
-      $image_path = "/villa_images/".$mediaImage->media_name; 
+      $image_path = public_path("/villa_images/".$mediaImage->media_name); 
       if(File::exists($image_path)) {
          File::delete($image_path);
+         $mediaImage = Media::find($request->media_id);
+         $mediaImage->delete();
       }else{
-         return response()->json($image_path);
+         return response()->json(false);
       }
-      return response()->json('Successfully removed');
+      return response()->json(true);
    }
 
 }

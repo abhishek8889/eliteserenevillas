@@ -422,7 +422,7 @@ label{
                     <div class="row inner-scroll">
                             @foreach($villas['media'] as $media)
                             
-                            <div class="col-md-4">
+                            <div class="col-md-4 image{{ $media->id ?? '' }}">
                                 <div class="gallery-card">
                                     <div class="gallery-card-body">
                                         <label class="block-check">
@@ -482,6 +482,10 @@ label{
                 },
                 success: function(response) {
                     console.log(response);
+                    if(response == true){
+                        $('image'+featuredImage).addClass('d-none');
+                        NioApp.Toast('Image has been removed', 'info', {position: 'top-right'});
+                    }
                 }
             });
         });
@@ -508,6 +512,7 @@ label{
                 },
                 success: function(response) {
                     console.log(response);
+                  
                 }
             });
 //   console.log($(this).val());
