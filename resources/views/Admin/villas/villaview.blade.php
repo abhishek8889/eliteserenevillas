@@ -393,12 +393,12 @@ label{
                                                     <div class="row inner-scroll">
                                                             @foreach($villas['media'] as $media)
                                                             
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-4 gallery{{ $media->id ?? '' }}">
                                                                 <div class="gallery-card">
                                                                     <div class="gallery-card-body">
                                                                         <label class="block-check">
                                                                             <img src="{{ url('villa_images/'.$media->media_name) }}" class="img-responsive" />
-                                                                            <input type="checkbox" class="main_image" value="{{ $media->id ?? '' }}" villa-id="{{ $media->villa_id ?? '' }}"
+                                                                            <input type="checkbox" class="main_image media{{ $media->id ?? '' }}" value="{{ $media->id ?? '' }}" villa-id="{{ $media->villa_id ?? '' }}"
                                                                             <?php 
                                                                             if ( $villas->banner_id == $media->id ){
                                                                                 echo 'checked';
@@ -416,6 +416,11 @@ label{
                                                             @endforeach
                                                         </div>
                                                 </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-warning" id="imageButton">Add new Image</button>
+                                                <input type="file" id="imageInput" villa-id="{{ $villas->id ?? '' }}" style="display: none;">
+
                                             </div>
                                         </div>
                                     </div>
@@ -489,12 +494,50 @@ label{
                                     </div>
                                 </div>
 
-                                <script>
+<script>
+$(document).ready(function() {
+    $('#imageButton').on('click', function() {
+        $('#imageInput').click();
+    });
+
+    $('#imageInput').on('change', function(e) {
+        var file = e.target.files[0];
+        var villaId = $(this).attr('villa-id');
+        
+        var formData = new FormData();
+        formData.append('image', file);
+        formData.append('villaId', villaId);
+        formData.append('_token', '{{csrf_token()}}');
+        
+        $.ajax({
+            method: 'POST',
+            url: "/admin-dashboard/villas/add-image",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function(response) {
+                console.log(response);
+                if(response !== false){
+                    location.reload(true);
+                    NioApp.Toast(response, 'info', {position: 'top-right'});
+                }else{
+                    NioApp.Toast('Failed to uploade image', 'info', {position: 'top-right'});
+                }
+            },
+        });
+    });
+});
+
+
+
+</script>
+<script>
     $(document).ready(function (){
         $('.delete-image').on('click', function (e){
             e.preventDefault();
             console.log($(this).attr('data-id'));
             var media_id = $(this).attr('data-id');
+            if($('.media'+media_id).prop('checked') == false){
             $.ajax({
                 method: 'post',
                 url: '{{ url('admin-dashboard/villas/remove-image') }}',
@@ -504,9 +547,18 @@ label{
                     _token: '{{csrf_token()}}'
                 },
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
+                    if(response == true){
+                        $('.gallery'+media_id).addClass('d-none');
+                        NioApp.Toast('Image has been deleted', 'info', {position: 'top-right'});
+                    }else{
+                        NioApp.Toast('Failed to delete Image', 'error', {position: 'top-right'});
+                    }
                 }
             });
+            }else{
+                NioApp.Toast('Please Select Other Featured Image', 'error', {position: 'top-right'});
+            }
         });
     });
 </script>
@@ -530,7 +582,12 @@ label{
                     _token: '{{csrf_token()}}'
                 },
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
+                    if(response != false){
+                    NioApp.Toast(response, 'info', {position: 'top-right'});
+                    }else{
+                        NioApp.Toast('Failed to update', 'info', {position: 'top-right'});
+                    }
                 }
             });
 //   console.log($(this).val());
