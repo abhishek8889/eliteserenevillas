@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authentication\AuthenticationController;
 use App\Http\Controllers\Admin\AdminDashController;
+use App\Http\Controllers\Admin\AmenitiesController;
 use App\Http\Controllers\Admin\VillaController;
 use App\Http\Controllers\Admin\PricingController;
 
@@ -49,4 +50,10 @@ Route::get('admin-dashboard/calendar/{id}',[VillaController::class,'calendar']);
 
 Route::post('admin-dashboard/villas/remove-image', [VillaController::class,'removeImage']);
 Route::post('admin-dashboard/villas/add-image', [VillaController::class,'addImage']);
+
+// Amenities
+Route::get('admin-dashboard/amenities',[AmenitiesController::class, 'index']);
+Route::post('admin-dashboard/amenities/amenities-add', [AmenitiesController::class, 'add']);
+Route::post('admin-dashboard/amenities/amenities-remove', [AmenitiesController::class, 'remove']);
+Route::post('admin-dashboard/amenities/amenities-update', [AmenitiesController::class, 'update']);
 });
