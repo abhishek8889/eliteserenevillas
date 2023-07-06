@@ -15,10 +15,15 @@ class AmenitiesController extends Controller
     }
     public function add(Request $request)
     {
-        if ($request->has('amenitiesName')) {
+        if ($request->has('name')) {
+            $request->validate([
+                'name' => 'required|unique:amenities',
+                'slug' => 'required|unique:amenities',
+            ]);
+            
             $Amenities =  new Amenities;
-            $Amenities->name = $request->amenitiesName;
-            $Amenities->admin_id = Auth::user()->id;
+            $Amenities->name = $request->name;
+            $Amenities->slug = $request->slug;
             $Amenities->save();
             return response()->json('Amenities has been added successfully');
         }
@@ -34,8 +39,14 @@ class AmenitiesController extends Controller
     }
     public function update(Request $request){
         if ($request->has('name')) {
+            $request->validate([
+                'name' => 'required|unique:amenities,name,' . $request->editId,
+                'slug' => 'required|unique:amenities,slug,' . $request->editId,
+            ]);
+            
             $Amenities =  Amenities::find($request->editId);
             $Amenities->name = $request->name;
+            $Amenities->slug = $request->slug;
             $Amenities->update();
             return response()->json('Amenities has been updated successfully');
         }

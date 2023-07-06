@@ -1,174 +1,30 @@
 @extends('admin_layout/index')
 @section('content')
-
-<style>
-.fc-icon-left-single-arrow:after{
-    top: -90% !important;
-}
-.fc-icon-right-single-arrow:after{
-    top: -90% !important;
-}
-a {
-    color: #fff;
-    text-decoration: none;
-}
-a:hover {
-    color: #fff;
-    text-decoration: none;
-}
-/*--choice modal1--*/
-
-.openbtn{
-    margin-top:80px;
-}
-.modal-header {
-    padding: 15px;
-     border-bottom: none;
-}
-.modal-title{
-	font-weight:bold;
-}
-.modal-body.choice-modal{
-    position: relative;
-    padding: 0px;
-
-}
-
-.row.inner-scroll {
-    height: 445px;
-    overflow: auto;
-}
-
-.mycard-footer {
-    height: 25px;
-    background: #333333;
-    font-size: 15px;
-    text-indent: 10px;
-   /* border-radius: 0 0px 4px 4px;*/
-}
-
-.gallery-card {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: .25rem;
-	    height: 132px;
-		margin-bottom:14px;
-}
-.gallery-card-body {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    /*padding: 1.25rem;*/
-}
-.gallery-card img {
-    height: 100px;
-    width: 100%;
-}
-label{
-    margin-bottom: 0 !important;
-}
-/*--checkbox--*/
-
-.block-check {
-    display: block;
-    position: relative;
-   
-   
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.block-check input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-	cursor: pointer;
-}
-
-/* On mouse-over, add a grey background color */
-.block-check:hover input ~ .checkmark {
-    background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.block-check input:checked ~ .checkmark {
-    background-color: #2196F3;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-/* Show the checkmark when checked */
-.block-check input:checked ~ .checkmark:after {
-    display: block;
-}
-
-/* Style the checkmark/indicator */
-.block-check .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-
-</style>
-            
+  
 <div class="nk-block">
     <div class="card card-bordered">
-        <h2 class="text-end" data-bs-toggle="modal" data-bs-target="#modalDefault123"><em class="icon ni ni-edit"></em>
-        </h2>
+        <!-- <h2 class="text-end" data-bs-toggle="modal" data-bs-target="#modalDefault123"><em class="icon ni ni-edit"></em>
+        </h2> -->
         <div class="card-inner">
             <div class="row pb-5">
                 <div class="col-lg-6">
+                    <div class="card-inner-left">
+                <h2 class="text-end card-heading-mm" data-bs-toggle="modal" data-bs-target="#modalDefault123"><em class="icon ni ni-edit"></em></h2>
                     <div class="product-gallery me-xl-1 me-xxl-5">
                         <div class="slider-init" id="sliderFor"
                             data-slick='{"arrows": false, "fade": true, "asNavFor":"#sliderNav", "slidesToShow": 1, "slidesToScroll": 1}'>
+                            <!-- <h2 class="text-end" data-bs-toggle="modal" data-bs-target="#modalDefault123"><em class="icon ni ni-edit"></em></h2> -->
                             @foreach($villas['media'] as $media)
                             <div class="slider-item rounded">
-                                <img src="{{ url('villa_images/'.$media->media_name) }}" class="w-100" alt="">
+                                <img src="{{ url('villa_images/'.$media->media_name) }}" class="w-100 d-none classimg" alt="" >
                             </div>
                             @endforeach
                         </div><!-- .slider-init -->
-                        <div class="slider-init slider-nav" id="sliderNav" data-slick='{"arrows": false, "slidesToShow": 5, "slidesToScroll": 1, "asNavFor":"#sliderFor", "centerMode":true, "focusOnSelect": true, 
+                        <div class="slider-init slider-nav d-none classimg" id="sliderNav" data-slick='{"arrows": false, "slidesToShow": 5, "slidesToScroll": 1, "asNavFor":"#sliderFor", "centerMode":true, "focusOnSelect": true, 
                                 "responsive":[ {"breakpoint": 1539,"settings":{"slidesToShow": 4}}, {"breakpoint": 768,"settings":{"slidesToShow": 3}}, {"breakpoint": 420,"settings":{"slidesToShow": 2}} ]
                             }'> @foreach($villas['media'] as $media)
                             <div class="slider-item">
-                                <div class="thumb">
+                                <div class="thumb d-none classimg">
                                     <img src="{{ url('villa_images/'.$media->media_name) }}" alt="">
                                 </div>
                             </div>
@@ -176,6 +32,7 @@ label{
                         </div><!-- .slider-nav -->
                     </div><!-- .product-gallery -->
                 </div><!-- .col -->
+                        </div>
                 <div class="col-lg-6">
                     <!-- <div class="product-meta">
                         <ul class="d-flex flex-wrap ailgn-center g-2 pt-1">
@@ -204,14 +61,15 @@ label{
                             <!-- <div class="amount">(2 Reviews)</div> -->
                         </div><!-- .product-rating -->
                         <div class="">
-                            <div class="card" style="width: 100%;">
-                            <div class="card-header d-flex bd-highlight">
-                                <div class="p-2 flex-grow-1 bd-highlight">ADDRESS</div>
-                                <div class=" p-2 bd-highlight">
-                                    <button class="btn btn-danger update-address">Edit</button>
-                                    <button class="btn btn-success d-none update-save" address-id="{{ $villas->address['id'] ?? '' }}">Save Update</button>
-                                </div>
-                            </div>
+                            <div class="card card-bordered" style="width: 100%;">
+                                <div class="card-header d-flex bd-highlight">
+                                    <div class="p-2 flex-grow-1 bd-highlight">ADDRESS</div>
+                                        <div class=" p-2 bd-highlight">
+                                            <button class="btn btn-danger update-address">Edit</button>
+                                            <button class="btn btn-success d-none update-save" address-id="{{ $villas->address['id'] ?? '' }}">Save Update</button>
+                                        </div>
+                                    </div>
+                                
                                 <div class="row">
                                     <div class="col-5">
                                         <ul class="list-group list-group-flush">
@@ -231,7 +89,7 @@ label{
                                     </div>
 
                                 </div>
-
+                               
                             </div>
 
                             <!-- <p class="lead">Location: <span class="location-span">{{ $villas->address['street_name'] ?? '' }},{{ $villas->address['city'] ?? '' }}, {{ $villas->address['state'] ?? '' }} ,{{ $villas->address['country'] ?? '' }} </span><sup><span id="edit_location"><em class="icon ni ni-edit"></em></span></sup> </p> -->
@@ -389,32 +247,47 @@ label{
                                                 <h5 class="modal-title">Select Featured Image</h5>
                                             </div>
                                             <div class="modal-body choice-modal">
-                                                <div class="container-fluid">
-                                                    <div class="row inner-scroll">
-                                                            @foreach($villas['media'] as $media)
-                                                            
-                                                            <div class="col-md-4 gallery{{ $media->id ?? '' }}">
-                                                                <div class="gallery-card">
-                                                                    <div class="gallery-card-body">
-                                                                        <label class="block-check">
-                                                                            <img src="{{ url('villa_images/'.$media->media_name) }}" class="img-responsive" />
-                                                                            <input type="checkbox" class="main_image media{{ $media->id ?? '' }}" value="{{ $media->id ?? '' }}" villa-id="{{ $media->villa_id ?? '' }}"
-                                                                            <?php 
-                                                                            if ( $villas->banner_id == $media->id ){
-                                                                                echo 'checked';
-                                                                            } 
-                                                                            ?>
-                                                                            />
-                                                                            <span class="checkmark"></span>
-                                                                        </label>
-                                                                        <div class="mycard-footer">
-                                                                            <a href="#" class="delete-image card-link" data-id="{{ $media->id }}">Delete</a>
+                                            <div class="nk-content ">
+                                                    <div class="container-fluid">
+                                                        <div class="nk-content-inner">
+                                                            <div class="nk-content-body">
+                                                                
+                                                                <div class="nk-block">
+                                                                    <div class="row g-gs">
+                                                                    @foreach($villas['media'] as $media)
+                                                                        <div class="col-sm-6 col-lg-6 col-xxl-6 gallery{{ $media->id ?? '' }}">
+                                                                            <div class="gallery card card-bordered">
+                                                                                <!-- <a class="gallery-image popup-image" href="{{ url('villa_images/'.$media->media_name) }}"> -->
+                                                                                    <img class="w-100 rounded-top" src="{{ url('villa_images/'.$media->media_name) }}" alt="">
+                                                                                <!-- </a> -->
+                                                                                <div class="">
+                                                                                    
+                                                                                <div class="d-flex justify-content-between">
+                                                                                    <button class="btn btn-p-0 btn-nofocus fetureSelect 
+                                                                                     <?php 
+                                                                                    if ( $villas->banner_id == $media->id ){
+                                                                                        echo 'text-danger';
+                                                                                    } 
+                                                                                    ?>" data-id="{{ $media->id ?? '' }}"><em class="icon ni ni-star "></em></button>
+                                                                                    <input type="checkbox" class="d-none main_image media{{ $media->id ?? '' }}" value="{{ $media->id ?? '' }}" villa-id="{{ $media->villa_id ?? '' }}"
+                                                                                    <?php 
+                                                                                    if ( $villas->banner_id == $media->id ){
+                                                                                        echo 'checked';
+                                                                                    } 
+                                                                                    ?>
+                                                                                    />
+                                                                                    <button class="btn btn-p-0 btn-nofocus delete-image" data-id="{{ $media->id }}"><em class="icon ni ni-trash"></em></button>
+                                                                                </div>
+
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
+                                                                        @endforeach
                                                                     </div>
-                                                                </div>
+                                                                </div><!-- .nk-block -->
                                                             </div>
-                                                            @endforeach
                                                         </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -426,8 +299,8 @@ label{
                                     </div>
                                 </div>
                                 </div>
-                       
-                        <div class="container"  style="background-color:white; padding:10px;">
+                    <div class="outer_div" style="padding:20px;">  
+                    <div class="nk-block"  style="background-color:white; padding:20px;">
                         <div class="nk-block-head">
                                             <div class="nk-block-head-content d-flex justify-content-between">
                                                 <h4 class="title nk-block-title">Calendar</h4>
@@ -437,7 +310,7 @@ label{
                                                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
                                                                     <ul class="link-list-plain">
                                                                         <li><a data-bs-toggle="modal" data-bs-target="#importModal">Import</a></li>
-                                                                        <li><a href="#"  data-bs-toggle="tooltip" data-bs-placement="top" title="(download ics file)">Export</a></li>
+                                                                        <li><a href="{{ url('admin-dashboard/export-data/'.$villas->id) }}"  data-bs-toggle="tooltip" data-bs-placement="top" title="(download ics file)">Export</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -446,6 +319,7 @@ label{
                            </div>
                              <div id='calendar'></div>
                         </div>
+                                                                        </div>
                         <!-- import modal -->
                         <div class="modal fade" tabindex="-1" id="importModal">
                                     <div class="modal-dialog" role="document">
@@ -493,7 +367,35 @@ label{
                                         </div>
                                     </div>
                                 </div>
+<!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-body">
+                            <div class="card card-bordered">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                            <h5 class="card-title" id="event_title"></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <p class="card-text" id="event_date"></p>
+                                            
+                                            <p class="card-text" id="event_description"> </p>
+                                        </div>
+                                    
+                                    </div>
+                            </div>
+                        </div>
+                        </div>
+<script>
+    $(document).ready(function (){
+        $('.classimg').removeClass('d-none');
+    });
+    // $(window).on('load', function(){
+    //     alert('a');
+    // });
 
+</script>
 <script>
 $(document).ready(function() {
     $('#imageButton').on('click', function() {
@@ -531,7 +433,7 @@ $(document).ready(function() {
 
 
 </script>
-<script>
+ <script>
     $(document).ready(function (){
         $('.delete-image').on('click', function (e){
             e.preventDefault();
@@ -564,6 +466,14 @@ $(document).ready(function() {
 </script>
 <script>
     $(document).ready(function (){
+        $('.fetureSelect').on('click', function (){
+            console.log('Clicked ');
+            var mediaId = $(this).attr('data-id');
+            console.log(mediaId);
+            $('.media'+mediaId).click();
+            $('.fetureSelect').removeClass('text-danger');
+            $(this).addClass('text-danger');
+        });
         $('input[type="checkbox"]').on('change', function() {
         if ($(this).is(':checked')) {
             $('input[type="checkbox"]').not(this).prop('checked', false);
@@ -760,7 +670,22 @@ var calendar = $('#calendar').fullCalendar({
     {
         console.log(start._d);
         console.log(end._d);
-    }
+    },
+    eventClick:function(event)
+    {
+        start_date = moment(event.start._d, "YYYY-MM-DD HH:mm").format('DD MMMM');
+        end_date = moment(event.end._d, "YYYY-MM-DD HH:mm").format('DD MMMM YYYY');
+        console.log(end_date);
+        console.log(event.title);
+        console.log(event.description);
+        console.log(event.start._d);
+        console.log(event.end._d);
+        $('#exampleModal').modal('show');
+        $('#event_title').html(event.title);
+        $('#event_date').html(start_date+' to '+end_date)
+        $('#event_description').html(event.description);
+
+    },
 });
   </script>
 

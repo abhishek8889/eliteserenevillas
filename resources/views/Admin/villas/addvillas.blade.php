@@ -3,7 +3,7 @@
 <div class="card card-bordered card-preview">
          <div class="card-inner">
              <div class="preview-block">
-                 <span class="preview-title-lg overline-title">Add Villas</span>
+                 <span class="preview-title-lg overline-title">Add Listing</span>
                  <div class="row gy-4">
                      <div class="col-sm-6">
                     <form action="{{ route('addVillasProc') }}" method="post" enctype="multipart/form-data">
@@ -11,7 +11,7 @@
                          <div class="form-group">
                              <label class="form-label" for="villaname">Name</label>
                              <div class="form-control-wrap">
-                                 <input type="text" class="form-control" name ="villaname" id="villaname" placeholder="Villas Name">
+                                 <input type="text" class="form-control" name ="villaname" id="villaname" placeholder="Listing Name">
                              </div>
                              @if ($errors->has('villaname'))
                             <span class="text-danger">{{ $errors->first('villaname') }}</span>
@@ -74,6 +74,9 @@
                                     <input type="file" multiple class="form-file-input" name="images[]" id="customMultipleFiles">
                                     <label class="form-file-label" for="customMultipleFiles">Choose files</label>
                                 </div>
+                                @if ($errors->has('images'))
+                            <span class="text-danger">{{ $errors->first('images') }}</span>
+                             @endif
                             </div>
                          </div>
                     </div>

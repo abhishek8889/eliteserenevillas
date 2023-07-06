@@ -56,45 +56,33 @@ class AdminDashController extends Controller
           }   
           return redirect()->back()->with('success','successfully imported data');
     }
-    public function export(){
+    public function export($id){
       $file_path = public_path("icsfiles/listing-53876125.ics");
-      $data[0]  = "BEGIN:VCALENDAR";
-      $data[1] = "PRODID:-//Google Inc//Google Calendar 70.9054//EN";
-      $data[2] = "VERSION:2.0";
-      $data[3] = "CALSCALE:GREGORIAN";
-      $data[4] = "METHOD:REQUEST";
-      $data[8] = "BEGIN:VEVENT";
-      $data[9] = "DTSTART:20230712T081111Z";
-      $data[10] = "DTEND:20230612T101111Z";
-      $data[11] = "DTSTAMP:20140312T072230Z";
-      $data[12] = "UID:aj5nufn03q772ukb54u1pp6c88@example.com";
-      $data[13] = "CREATED:20140312T072126Z";
-      $data[14] = "DESCRIPTION:Hair cut\, 2\,5h\, 300Eur";
-      $data[15] = "LAST-MODIFIED:20140312T072206Z";
-      $data[16] = "LOCATION:";
-      $data[17] = "SEQUENCE:0";
-      $data[18] = "STATUS:CONFIRMED";
-      $data[19] = "SUMMARY:Matu griešana";
-      $data[20] = "TRANSP:OPAQUE";
-      $data[21] = "END:VEVENT";
-      $data[22] = "BEGIN:VEVENT";
-      $data[23] = "DTSTART:20230712T081111Z";
-      $data[24] = "DTEND:20230612T101111Z";
-      $data[25] = "DTSTAMP:20140312T072230Z";
-      $data[26] = "UID:aj5nufn03q772ukb54u1pp6c88@example.com";
-      $data[27] = "CREATED:20140312T072126Z";
-      $data[28] = "DESCRIPTION:Hair cut\, 2\,5h\, 300Eur";
-      $data[29] = "LAST-MODIFIED:20140312T072206Z";
-      $data[30] = "LOCATION:";
-      $data[31] = "SEQUENCE:0";
-      $data[32] = "STATUS:CONFIRMED";
-      $data[33] = "SUMMARY:Matu griešana";
-      $data[34] = "TRANSP:OPAQUE";
-      $data[35] = "END:VEVENT";
-      $data[36] = "END:VCALENDAR";
+      $events = Event::where('villa_id',$id)->get();
+      $new_data_ics = [];
+      $new_data_ics[0]  = "BEGIN:VCALENDAR";
+      $new_data_ics[1] = "PRODID:-//Google Inc//Google Calendar 70.9054//EN";
+      $new_data_ics[2] = "VERSION:2.0";
+      $new_data_ics[3] = "CALSCALE:GREGORIAN";
+      $new_data_ics[4] = "METHOD:REQUEST";
+      foreach($events as $ev){
+        $start = new DateTime($ev->start);
+        $end = new DateTime($ev->end);
+        $start_date =  $start->format('Ymd');
+        $end_date =  $end->format('Ymd');
+        $new_data_ics[] = "BEGIN:VEVENT";
+        $new_data_ics[] = "DTSTART:$start_date";
+        $new_data_ics[] = "DTEND:$end_date";
+        $new_data_ics[] = "UID:$ev->uid";
+        $new_data_ics[] = "DESCRIPTION:$ev->descirption";
+        $new_data_ics[] = "SUMMARY:$ev->event";
+        $new_data_ics[] = "END:VEVENT";
+      }
+      $new_data_ics[] = "END:VCALENDAR";
+    
 
-     $data_ = implode("\r\n", $data);
-     file_put_contents($file_path, "\xEF\xBB\xBF".  $data_);
+     $new_data_ics = implode("\r\n", $new_data_ics);
+     file_put_contents($file_path, "\xEF\xBB\xBF".  $new_data_ics);
      return response()->download(public_path('icsfiles/listing-53876125.ics'));
     }
     }
