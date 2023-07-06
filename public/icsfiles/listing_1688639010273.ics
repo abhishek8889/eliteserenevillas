@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+        VERSION:2.0
+        PRODID:-//Your Company//Your Application//EN
+        CALSCALE:GREGORIAN
+        METHOD:PUBLISH
+        X-WR-CALNAME:Your Calendar
+        X-WR-TIMEZONE:Europe/London
+        BEGIN:VEVENT
+        DTSTART:20230705T090000
+        DTEND:20230705T100000
+        SUMMARY:Meeting
+        DESCRIPTION:This is a meeting description.
+        LOCATION:Meeting Room
+        END:VEVENT
+        END:VCALENDAR
