@@ -32,7 +32,7 @@ class AdminDashController extends Controller
       if($request->hasFile('file')){
         $file = $request->file('file');
         if($file->getClientOriginalExtension() !== 'ics'){
-          return redirect()->back()->with(['error'=>'Only ics file supported']);
+          return redirect()->back()->with(['error'=>'Only ics file supported.']);
         }
          $name = 'listing_'.time().rand(1,1000).'.'.$file->getClientOriginalExtension();
          $file->move(public_path().'/icsfiles',$name);
@@ -80,7 +80,7 @@ class AdminDashController extends Controller
         if($ev->descirption == null || $ev->descirption == ""){
 
         }else{
-          $new_data_ics[] = "DESCRIPTION:$ev->descirption";
+          $new_data_ics[] = 'DESCRIPTION:'.str_replace("\n"," ",$ev->descirption);
         }
         $new_data_ics[] = "SUMMARY:$ev->title";
         $new_data_ics[] = "END:VEVENT";

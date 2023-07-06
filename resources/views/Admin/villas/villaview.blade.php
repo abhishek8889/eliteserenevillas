@@ -713,7 +713,8 @@ $(document).ready(function() {
                     _token: '{{csrf_token()}}'
                 },
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
+                    
                     $('#villa_name').html(val);
                 }
             })

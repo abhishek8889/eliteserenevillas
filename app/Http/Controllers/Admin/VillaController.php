@@ -94,10 +94,10 @@ class VillaController extends Controller
    }
    public function update(Request $request){
       if($request->val){
-      $slug = strtolower(str_replace(" ","-",$request->val));
+      // $slug = strtolower(str_replace(" ","-",$request->val));
       $update = Villas::find($request->id);
       $update->name = $request->val;
-      $update->slug = $slug;
+      // $update->slug = $slug;
       $update->update();
       return response()->json('successfully updated villas name');
       }
