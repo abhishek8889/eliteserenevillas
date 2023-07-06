@@ -26,11 +26,14 @@ class AdminDashController extends Controller
     }
     public function importproc(Request $request){
       // print_r($request->all());
-      $request->validate([
-        'file' => 'required|mimes:ics',
-      ]);
+      // $request->validate([
+      //   'file' => 'required|mimes:text/calendar',
+      // ]);
       if($request->hasFile('file')){
         $file = $request->file('file');
+        if($file->getClientOriginalExtension() !== 'ics'){
+          return redirect()->back()->with(['error'=>'Only ics file supported']);
+        }
          $name = 'listing_'.time().rand(1,1000).'.'.$file->getClientOriginalExtension();
          $file->move(public_path().'/icsfiles',$name);
       }
@@ -86,9 +89,8 @@ class AdminDashController extends Controller
     
 
      $new_data_ics = implode("\r\n", $new_data_ics);
+     header("text/calendar");
      file_put_contents($file_path, "\xEF\xBB\xBF".  $new_data_ics);
-      header('Content-Type: application/octet-stream');
-      header('Content-Length: ' . filesize($file_path));
      return response()->download(public_path('icsfiles/listing-53876125.ics'));
     }
     }
