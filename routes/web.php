@@ -47,4 +47,5 @@ Route::post('admin-dashboard/pricing',[PricingController::class,'pricingAdd']);
 Route::get('admin-dashboard/pricing/{id}',[PricingController::class,'delete']);
 Route::get('admin-dashboard/calendar/{id}',[VillaController::class,'calendar']);
 
+Route::post('admin-dashboard/villas/remove-image', [VillaController::class,'removeImage']);
 });

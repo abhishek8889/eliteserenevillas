@@ -9,7 +9,8 @@ use App\Models\Media;
 use App\Models\Pricing;
 use App\Models\Event;
 use Auth;
-
+use DB;
+use Illuminate\Support\Facades\File;
 class VillaController extends Controller
 {
    public function index(){
@@ -100,12 +101,30 @@ class VillaController extends Controller
       $update->update();
       return response()->json('successfully updated villas name');
       }
+      // Update Image code is here
       elseif($request->image_id){
          $media = Media::find($request->image_id);
          if($request->hasFile('file')){
             ///////
+            $file = $request->file('file');
+            $extension = $file->getClientOriginalExtension();
+            $name = 'villas_'.rand(0,1000).time().'.'.$extension;
+            $file->move(public_path().'/villa_images/',$name);
+            $update = Media::find($request->image_id);
+            $update->media_name = $name;
+            $update->media_url = url('villa_images/'.$name);
+            $update->update();
+            return redirect()->back()->with('success','Image has been updated');
          }
-      }else{
+      }
+      // Add Feature Image Code 
+      elseif($request->featuredImage){
+         $Villa = Villas::where("id",$request->villaId)->update(["banner_id" => $request->featuredImage]);
+         return response()->json('Successfully updated');
+         // return response()->json($request->all());
+      }
+      // This is address update code
+      else{
         $request->validate([
          'street' => 'required',
          'city' => 'required',
@@ -138,4 +157,19 @@ class VillaController extends Controller
 
    }
    
+// }
+   // Remove Image function 
+   public function removeImage(Request $request){
+      // return  response()->json($request->all());
+      $mediaImage = Media::find($request->media_id);
+      $image_path = $mediaImage->media_url;
+      $image_path = "/villa_images/".$mediaImage->media_name; 
+      if(File::exists($image_path)) {
+         File::delete($image_path);
+      }else{
+         return response()->json($image_path);
+      }
+      return response()->json('Successfully removed');
+   }
+
 }
