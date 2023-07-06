@@ -15,6 +15,13 @@
                                     placeholder="Amenities Name">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="form-label" for="amenitiesSlug">Slug</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" name="amenitiesSlug" id="amenitiesSlug"
+                                    placeholder="Amenities Name">
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <button type="button" class="btn btn-primary addAmenities">Add</button>
@@ -42,7 +49,11 @@
                             <span>Amenities Name</span>
                         </span>
                     </th>
-                   
+                    <th class="tb-tnx-info">
+                        <span class="tb-tnx-desc d-none d-sm-inline-block">
+                            <span>Amenities Slug</span>
+                        </span>
+                    </th>
                     <th class="tb-tnx-action">
                         <span>Action</span>
                     </th>
@@ -57,7 +68,13 @@
                     </td>
                     <td class="tb-tnx-info">
                         <div class="tb-tnx-desc">
-                            <input type="text" class="title name{{ $amenitie->id ?? '' }}" value="{{ $amenitie->name ?? '' }}"  disabled style="border: none; background: transparent;" />
+                            <input type="text" data-id="{{ $amenitie->id ?? '' }}" class="titleName name{{ $amenitie->id ?? '' }}" value="{{ $amenitie->name ?? '' }}"  disabled style="border: none; background: transparent;" />
+                        </div>
+                       
+                    </td>
+                    <td class="tb-tnx-info">
+                        <div class="tb-tnx-desc">
+                            <input type="text" data-id="{{ $amenitie->id ?? '' }}" class="titleSlug slug{{ $amenitie->id ?? '' }}" value="{{ $amenitie->slug ?? '' }}"  disabled style="border: none; background: transparent;" />
                         </div>
                        
                     </td>
@@ -82,13 +99,31 @@
         </table>
     </div><!-- .card-preview -->
 </div>
+<script>
 
+    $(document).ready(function(){
+        $('#amenitiesName').on('keyup',function(){
+            let name = $(this).val().toLowerCase();
+            let slug = name.replace(/ /g, "-");
+           $('#amenitiesSlug').val(slug);
+        });
+        $("body").delegate(".titleName", "keyup", function(e) {
+        // $('.titleName').on('keyup', function (){
+            console.log($(this).attr('data-id'));
+            var id = $(this).attr('data-id');
+            let name = $(this).val().toLowerCase();
+            let slug = name.replace(/ /g, "-");
+            $('.slug'+id).val(slug);
+        })
+    });
+</script>
 <script>
     $(document).ready(function() {
     $("body").delegate(".addAmenities", "click", function(e) {
         var amenitiesName = $('#amenitiesName').val();
-        if (amenitiesName === '') {
-            NioApp.Toast('Name field cannot be null', 'info', {position: 'top-right'});
+        var amenitiesSlug = $('#amenitiesSlug').val();
+        if (amenitiesName === '' || amenitiesSlug === '') {
+            NioApp.Toast('Fields cannot be null', 'info', {position: 'top-right'});
             return false;
         }
         $.ajax({
@@ -96,14 +131,31 @@
             url: '{{ url('admin-dashboard/amenities/amenities-add') }}',
             dataType: 'json',
             data: {
-                    amenitiesName : amenitiesName,
+                    slug : amenitiesSlug,
+                    name : amenitiesName,
                     _token: '{{csrf_token()}}'
                 },
             success: function(response) {
                 console.log(response);
                 $('#amenitiesName').val('');
+                $('#amenitiesSlug').val('');
                 NioApp.Toast(response, 'info', {position: 'top-right'});
                 $("#table").load(location.href + " #table");
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                var errors = jqXHR.responseJSON.errors;
+                for (var fieldName in errors) {
+                    if (errors.hasOwnProperty(fieldName)) {
+                        var errorMessages = errors[fieldName];
+
+                        errorMessages.forEach(function(errorMessage) {
+                            console.log(errorMessage);
+                            NioApp.Toast(errorMessage, 'error', {
+                                position: 'top-right'
+                            });
+                        });
+                    }
+                }
             }
         });
     });
@@ -138,6 +190,7 @@
             e.preventDefault();
             var editId = $(this).attr('data-id');
             $(".name"+editId).removeAttr('disabled').focus(); 
+            $(".slug"+editId).removeAttr('disabled'); 
             $('.drop'+editId).addClass('d-none');
             $('.updateAmenitie'+editId).removeClass('d-none');
             // console.log(editId);
@@ -146,6 +199,11 @@
             e.preventDefault();
             var editId = $(this).attr('data-id');
             var newName = $('.name'+editId).val();
+            var slug = $('.slug'+editId).val();
+            if (newName === '') {
+                NioApp.Toast('Amenities name field cannot be null', 'info', {position: 'top-right'});
+                return false;
+            }
             $.ajax({
                 method: 'POST',
                 url: '{{ url('admin-dashboard/amenities/amenities-update') }}',
@@ -153,6 +211,7 @@
                 data: {
                     editId : editId,
                     name : newName,
+                    slug : slug,
                     _token: '{{csrf_token()}}'
                     },
                 success: function(response) {
@@ -160,7 +219,18 @@
                     // $('#amenitiesName').val('');
                     NioApp.Toast(response, 'info', {position: 'top-right'});
                     $("#table").load(location.href + " #table");
-                }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    var errors = jqXHR.responseJSON.errors;
+
+                    Object.entries(errors).forEach(([fieldName, errorMessages]) => {
+                        errorMessages.forEach(errorMessage => {
+                        console.log(errorMessage);
+                        NioApp.Toast(errorMessage, 'error', { position: 'top-right' });
+                        });
+                    });
+                    }
+
             });
         });
     });

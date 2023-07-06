@@ -22,7 +22,7 @@ class VillaController extends Controller
    public function addvillas(){
 
       $amenities = Amenities::get();
-      dd($amenities);
+      // dd($amenities);
     return view('Admin.villas.addvillas');
    }
    public function addProcc(Request $request){

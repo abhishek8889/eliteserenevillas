@@ -1,0 +1,14 @@
+.nk-app-root .nk-main .nk-content .card.card-bordered .card-inner .card-inner-left {
+    position: relative;
+}
+
+.nk-app-root .nk-main .nk-content .card.card-bordered .card-inner .card-inner-left .card-heading-mm {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    z-index: 99;
+}
+
+.nk-app-root .nk-main .nk-content .card.card-bordered .card-inner .card-inner-left .card-heading-mm em.icon.ni.ni-edit {
+    color: rgba(255,255,255, 0.7);
+}
