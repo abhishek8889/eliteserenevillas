@@ -30,7 +30,7 @@ class VillaController extends Controller
          'city' => 'required',
          'state' => 'required',
          'country_name' => 'required',
-         // 'images' => 'mimes:jpg,png,jpeg,webp',
+         'images' => 'required|image',
       ]);
 
       $villas = new Villas;
@@ -142,6 +142,7 @@ class VillaController extends Controller
    }
    public function calendar($id){
       $events = Event::where('villa_id',$id)->get();
+     $data = array();
       foreach($events as $event){
       $data[] =  array(
          'id'       => $event->id,
@@ -149,6 +150,7 @@ class VillaController extends Controller
          'start'    =>  $event->start,
          'end'      =>  $event->end,
          'status'   =>  '1',
+         'description' => $event->descirption,
          'color'    =>  '#6294a7',
          'allDay'   =>  false,
      );

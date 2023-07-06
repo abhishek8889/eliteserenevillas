@@ -204,14 +204,15 @@ label{
                             <!-- <div class="amount">(2 Reviews)</div> -->
                         </div><!-- .product-rating -->
                         <div class="">
-                            <div class="card" style="width: 100%;">
-                            <div class="card-header d-flex bd-highlight">
-                                <div class="p-2 flex-grow-1 bd-highlight">ADDRESS</div>
-                                <div class=" p-2 bd-highlight">
-                                    <button class="btn btn-danger update-address">Edit</button>
-                                    <button class="btn btn-success d-none update-save" address-id="{{ $villas->address['id'] ?? '' }}">Save Update</button>
-                                </div>
-                            </div>
+                            <div class="card card-bordered" style="width: 100%;">
+                                <div class="card-header d-flex bd-highlight">
+                                    <div class="p-2 flex-grow-1 bd-highlight">ADDRESS</div>
+                                        <div class=" p-2 bd-highlight">
+                                            <button class="btn btn-danger update-address">Edit</button>
+                                            <button class="btn btn-success d-none update-save" address-id="{{ $villas->address['id'] ?? '' }}">Save Update</button>
+                                        </div>
+                                    </div>
+                                
                                 <div class="row">
                                     <div class="col-5">
                                         <ul class="list-group list-group-flush">
@@ -231,7 +232,7 @@ label{
                                     </div>
 
                                 </div>
-
+                               
                             </div>
 
                             <!-- <p class="lead">Location: <span class="location-span">{{ $villas->address['street_name'] ?? '' }},{{ $villas->address['city'] ?? '' }}, {{ $villas->address['state'] ?? '' }} ,{{ $villas->address['country'] ?? '' }} </span><sup><span id="edit_location"><em class="icon ni ni-edit"></em></span></sup> </p> -->
@@ -421,8 +422,8 @@ label{
                                     </div>
                                 </div>
                                 </div>
-                       
-                        <div class="container"  style="background-color:white; padding:10px;">
+                    <div class="outer_div" style="padding:20px;">  
+                    <div class="nk-block"  style="background-color:white; padding:20px;">
                         <div class="nk-block-head">
                                             <div class="nk-block-head-content d-flex justify-content-between">
                                                 <h4 class="title nk-block-title">Calendar</h4>
@@ -432,7 +433,7 @@ label{
                                                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs" style="">
                                                                     <ul class="link-list-plain">
                                                                         <li><a data-bs-toggle="modal" data-bs-target="#importModal">Import</a></li>
-                                                                        <li><a href="#"  data-bs-toggle="tooltip" data-bs-placement="top" title="(download ics file)">Export</a></li>
+                                                                        <li><a href="{{ url('admin-dashboard/export-data/'.$villas->id) }}"  data-bs-toggle="tooltip" data-bs-placement="top" title="(download ics file)">Export</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -441,6 +442,7 @@ label{
                            </div>
                              <div id='calendar'></div>
                         </div>
+                                                                        </div>
                         <!-- import modal -->
                         <div class="modal fade" tabindex="-1" id="importModal">
                                     <div class="modal-dialog" role="document">
@@ -488,8 +490,27 @@ label{
                                         </div>
                                     </div>
                                 </div>
-
-                                <script>
+<!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-body">
+                            <div class="card card-bordered">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                            <h5 class="card-title" id="event_title"></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <p class="card-text" id="event_date"></p>
+                                            
+                                            <p class="card-text" id="event_description"> </p>
+                                        </div>
+                                    
+                                    </div>
+                            </div>
+                        </div>
+                        </div>
+ <script>
     $(document).ready(function (){
         $('.delete-image').on('click', function (e){
             e.preventDefault();
@@ -703,7 +724,22 @@ var calendar = $('#calendar').fullCalendar({
     {
         console.log(start._d);
         console.log(end._d);
-    }
+    },
+    eventClick:function(event)
+    {
+        start_date = moment(event.start._d, "YYYY-MM-DD HH:mm").format('DD MMMM');
+        end_date = moment(event.end._d, "YYYY-MM-DD HH:mm").format('DD MMMM YYYY');
+        console.log(end_date);
+        console.log(event.title);
+        console.log(event.description);
+        console.log(event.start._d);
+        console.log(event.end._d);
+        $('#exampleModal').modal('show');
+        $('#event_title').html(event.title);
+        $('#event_date').html(start_date+' to '+end_date)
+        $('#event_description').html(event.description);
+
+    },
 });
   </script>
 

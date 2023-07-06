@@ -33,7 +33,7 @@ Route ::group(['middleware' =>['admin']],function(){
 Route::get('/admin-dashboard',[AdminDashController::class,'index']);
 Route::get('admin-dashboard/import',[AdminDashController::class,'import']);
 Route::post('admin-dasboard/import-data',[AdminDashController::class,'importproc'])->name('importproc');
-Route::get('admin-dashboard/export-data',[AdminDashController::class,'export']);
+Route::get('admin-dashboard/export-data/{id}',[AdminDashController::class,'export']);
 
 Route::get('admin-dashboard/villas',[VillaController::class,'index']);
 Route::get('admin-dashboard/add-Villas',[VillaController::class,'addvillas']);
