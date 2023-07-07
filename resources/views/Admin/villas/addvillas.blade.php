@@ -63,11 +63,6 @@
                              @endif
                          </div>
                          <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                         </div>
-                     </div> 
-                    <div class="col-sm-6">
-                        <div class="form-group">
                             <label class="form-label" for="customMultipleFilesLabel">Upload Images</label>
                             <div class="form-control-wrap">
                                 <div class="form-file">
@@ -80,9 +75,21 @@
                             </div>
                          </div>
                          <div class="form-group">
+                             <label class="form-label" for="default-textarea">Description</label>
+                             <div class="form-control-wrap">
+                                 <textarea class="form-control no-resize" name="description" id="default-textarea"></textarea>
+                             </div>
+                         </div>
+                         <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                         </div>
+                     </div> 
+                    <div class="col-sm-6">
+                        
+                         <div class="form-group">
                                  <label class="form-label">Amenities</label>
                                  <div class="form-control-wrap">
-                                     <select class="form-select js-select2" multiple="multiple" data-placeholder="Select Multiple Amenities">
+                                     <select class="form-select js-select2" multiple="multiple" data-placeholder="Select Multiple Amenities"  name="amemities[]">
                                          <option value="default_option">Default Option</option>
                                          @foreach($amenities as $a)
                                          <option value="{{ $a->id ?? '' }}">{{ $a->name ?? '' }}</option>
@@ -90,12 +97,13 @@
                                      </select>
                                  </div>
                          </div>
-                         <div class="form-group">
-                             <label class="form-label" for="default-textarea">Description</label>
-                             <div class="form-control-wrap">
-                                 <textarea class="form-control no-resize" id="default-textarea"></textarea>
-                             </div>
-                         </div>
+                         @foreach($services as $service)
+                             <div class="form-group">
+                                <label class="form-label" for="cf-full-name">{{ $service->name ?? '' }}</label>
+                                <input type="text" class="form-control" name="servicename[]" id="cf-full-name">
+                            </div>
+                            @endforeach
+                        
                     </div>
                      </form>
                    

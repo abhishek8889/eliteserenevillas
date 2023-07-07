@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('name');
             $table->string('slug');
+            $table->string('description');
             $table->string('location_id')->nullable(); // get from Location table. 
             $table->string('banner_id')->nullable(); // get from media table
             $table->timestamps();
