@@ -681,7 +681,7 @@ var calendar = $('#calendar').fullCalendar({
         $('#event_title').html(event.title);
         $('#event_date').html(start_date+' to '+end_date)
         var descriptionData = $('#event_description').html(event.description);
-        console.warn(descriptionData.html());
+        // console.warn(descriptionData.html());
         var checkUrl = /(https?:\/\/[^\s]+)/g;
         var  url = '';
         url = descriptionData.html().match(checkUrl);

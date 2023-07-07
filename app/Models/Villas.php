@@ -15,4 +15,10 @@ class Villas extends Model
     public function media(){
         return $this->hasMany(Media::class,'villa_id','id');
     }
+    public function amenities(){
+        return $this->hasMany(VillaAmenities::class,'villa_id','id');
+    }
+    public function service(){
+        return $this->hasMany(Service::class,'villa_id','id');
+    }
 }

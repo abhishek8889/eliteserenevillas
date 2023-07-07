@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class VillaAmenities extends Model
 {
     use HasFactory;
+    
 }

@@ -225,5 +225,85 @@ class VillaController extends Controller
          return response()->json(false);
       }
   }
+
+
+  public function updateVilla(Request $request, $villaSlug){
+   $villasData = Villas::where('slug',$villaSlug)->with('amenities','service','address')->first();
+   // $villasData = Villas::where('slug',$villaSlug)->with('amenities','service','address')->first()->toArray();
+   // echo '<pre>';
+   // print_r($villasData);
+   // echo '</pre>';
+   // die();
+   $amenities = Amenities::get();
+   $services = Servicelist::get();
+   
+   return view('Admin.villas.editVillas',compact('amenities','services','villasData'));
+  }
+
+  public function updateProcc(Request $request){
+   $request->validate([
+      'villaname' => 'required',
+      'slug' => 'required|unique:villas,slug,' . $request->id,
+      'street_name' => 'required',
+      'city' => 'required',
+      'state' => 'required',
+      'country_name' => 'required',
+      // 'images' => '',
+   ]);
+   echo '<pre>';
+   print_r($request->all());
+   die();
+   $villas = Villas::find($request->id);
+   $villas->name = $request->villaname;
+   $villas->slug = $request->slug;
+   $villas->description = $request->description;
+   $villas->update();
+   $villaAddress = Address::find($request->id);
+   $villaAddress->city = $request->city;
+   $villaAddress->street_name = $request->street_name;
+   $villaAddress->state = $request->state;
+   $villaAddress->country = $request->country_name;
+   $villaAddress->update();
+
+   VillaAmenities::where(['villa_id' => $request->id])->delete();
+
+   if (!is_null($request->amenities)) {
+      foreach ($request->amenities as $amenity) {
+         $aminites = new VillaAmenities;
+         $aminites->villa_id = $villas->id;
+         $aminites->amenitie_id = $amenity;
+         $aminites->save();
+      }
+   }
+
+
+      // VillaAmenities::where(['villa_id' => $request->id] )->delete();
+      // foreach($request->amemities as $amenites){
+      //    // echo $amenites;
+      //    // VillaAmenities::where(['amenitie_id' => $amenites,'villa_id' => $request->id] )->delete()
+      //       // echo $amenites;
+      //       // echo $request->id;
+      //       // echo 'done';
+      // //   }else{
+      
+      //    $aminites = new VillaAmenities;
+      //    $aminites->villa_id = $villas->id;
+      //    $aminites->amenitie_id = $amenites;
+      //    $aminites->save();
+      // //   }
+      // }
+      $servicesAll = Service::where('villa_id', $request->id)->get()->toArray();
+
+      for($s = 0; $s < count($servicesAll); $s++){
+         $newValue = Service::find($servicesAll[$s]['id']);
+         $newValue->value = $request->servicename[$s];
+         // print_r('id : '.$servicesAll[$s]['id']);
+         // print_r('Old value :'.$servicesAll[$s]['value']);
+         // echo 'new value :'.$request->servicename[$s];
+         // echo '<br/>';
+      }
+      return redirect()->back()->with('success', 'Villa has been updated');
+   }
+  }
   
-}
+
