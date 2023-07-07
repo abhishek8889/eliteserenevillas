@@ -267,12 +267,11 @@ class VillaController extends Controller
    $villaAddress->update();
 
    VillaAmenities::where(['villa_id' => $request->id])->delete();
-
-   if (!is_null($request->amenities)) {
-      foreach ($request->amenities as $amenity) {
+   if($request->amemities){
+      foreach($request->amemities as $amenites){
          $aminites = new VillaAmenities;
-         $aminites->villa_id = $villas->id;
-         $aminites->amenitie_id = $amenity;
+         $aminites->villa_id = $request->id;
+         $aminites->amenitie_id = $amenites;
          $aminites->save();
       }
    }
@@ -293,16 +292,15 @@ class VillaController extends Controller
       //    $aminites->save();
       //   }
       // }
-      $servicesAll = Service::where('villa_id', $request->id)->get()->toArray();
-
-      for($s = 0; $s < count($servicesAll); $s++){
-         $newValue = Service::find($servicesAll[$s]['id']);
-         // $updateService = Service::where('')
-         $newValue->value = $request->servicename[$s];
-         // print_r('id : '.$servicesAll[$s]['id']);
-         // print_r('Old value :'.$servicesAll[$s]['value']);
-         // echo 'new value :'.$request->servicename[$s];
-         // echo '<br/>';
+      Service::where('villa_id', $request->id)->delete();
+      if($request->servicename){
+         for ($i=0; $i < count($request->servicename); $i++) { 
+            $service = new Service;
+            $service->service_id = $services[$i]['id'];
+            $service->value = $request->servicename[$i];
+            $service->villa_id = $request->id;
+            $service->save();
+         }
       }
       return redirect()->back()->with('success', 'Villa has been updated');
    }
