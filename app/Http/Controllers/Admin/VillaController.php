@@ -231,7 +231,8 @@ class VillaController extends Controller
    $villasData = Villas::where('slug',$villaSlug)->with('amenities','service','address')->first();
    // $villasData = Villas::where('slug',$villaSlug)->with('amenities','service','address')->first()->toArray();
    // echo '<pre>';
-   // print_r($villasData);
+   // // print_r($villasData->amenities[0]->id);
+   // print_r($request->all());
    // echo '</pre>';
    // die();
    $amenities = Amenities::get();
@@ -250,9 +251,9 @@ class VillaController extends Controller
       'country_name' => 'required',
       // 'images' => '',
    ]);
-   echo '<pre>';
-   print_r($request->all());
-   die();
+   // echo '<pre>';
+   // print_r($request->all());
+   // die();
    $villas = Villas::find($request->id);
    $villas->name = $request->villaname;
    $villas->slug = $request->slug;
@@ -280,22 +281,23 @@ class VillaController extends Controller
       // VillaAmenities::where(['villa_id' => $request->id] )->delete();
       // foreach($request->amemities as $amenites){
       //    // echo $amenites;
-      //    // VillaAmenities::where(['amenitie_id' => $amenites,'villa_id' => $request->id] )->delete()
-      //       // echo $amenites;
-      //       // echo $request->id;
-      //       // echo 'done';
-      // //   }else{
+      //   if(VillaAmenities::where(['amenitie_id' => $amenites,'villa_id' => $request->id] )->exist())
+      //       echo $amenites;
+      //       echo $request->id;
+      //       echo 'done';
+      //   }else{
       
       //    $aminites = new VillaAmenities;
       //    $aminites->villa_id = $villas->id;
       //    $aminites->amenitie_id = $amenites;
       //    $aminites->save();
-      // //   }
+      //   }
       // }
       $servicesAll = Service::where('villa_id', $request->id)->get()->toArray();
 
       for($s = 0; $s < count($servicesAll); $s++){
          $newValue = Service::find($servicesAll[$s]['id']);
+         // $updateService = Service::where('')
          $newValue->value = $request->servicename[$s];
          // print_r('id : '.$servicesAll[$s]['id']);
          // print_r('Old value :'.$servicesAll[$s]['value']);

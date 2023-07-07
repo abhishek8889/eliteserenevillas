@@ -80,13 +80,17 @@
                                          <!-- <option value="default_option">Default Option</option> -->
                                          @foreach($amenities as $a)
                                             <option value="{{ $a->id ?? '' }}"
-                                                <?php
-                                                for($i = 0 ; $i < count($villasData->amenities) ; $i++){
-                                                    if($a->id == $villasData->amenities[$i]->id){
+                                            <?php
+                                                for($x = 0; $x < count($villasData->amenities); $x++){
+                                                    if($a->id == $villasData->amenities[$x]->amenitie_id){
+                                                        print_r($a->id);
                                                         echo ' selected ';
+                                                        print_r($villasData->amenities[$x]->id);
                                                     }
                                                 }
-                                                ?> >
+                                                ?>     
+                                            >
+                                                
                                                 {{ $a->name ?? '' }}
                                             </option>
                                         @endforeach
