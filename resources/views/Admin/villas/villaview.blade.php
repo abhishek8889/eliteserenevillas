@@ -680,7 +680,25 @@ var calendar = $('#calendar').fullCalendar({
         $('#exampleModal').modal('show');
         $('#event_title').html(event.title);
         $('#event_date').html(start_date+' to '+end_date)
-        $('#event_description').html(event.description);
+        var descriptionData = $('#event_description').html(event.description);
+        console.warn(descriptionData.html());
+        var checkUrl = /(https?:\/\/[^\s]+)/g;
+        var  url = '';
+        url = descriptionData.html().match(checkUrl);
+        const phoneNumber = /Phone Number \(Last 4 Digits\): (\d{4})/;
+        const matches = phoneNumber.exec(descriptionData.html());
+        var number = '';
+        if (matches && matches.length > 1) {
+            number = matches[1];
+        // console.log("Phone Number : "+number); 
+        }
+        $('#event_description').html(''); 
+        if(url != null && url != "") {
+            $('#event_description').append(" Reservation URL:"+"<a href='"+url+"'>"+url+"</a><br>");
+        }
+        if(number != "" && number != null) {
+            $('#event_description').append("Phone Number : "+number+ ".");
+        }
 
     },
 });
