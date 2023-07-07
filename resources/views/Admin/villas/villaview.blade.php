@@ -123,14 +123,14 @@
                             </form> -->
 
                             <div class="product-meta">
-                                <ul class="d-flex flex-wrap ailgn-center g-2 pt-1">
+                                <!-- <ul class="d-flex flex-wrap ailgn-center g-2 pt-1">
 
                                     <li>
                                         <a href="{{ url('admin-dashboard/villas/delete/'.$villas->id) }}"> <button
                                                 class="btn btn-danger">Delete</button></a>
                                     </li>
 
-                                </ul>
+                                </ul> -->
                             </div>
                         </div><!-- .product-info -->
                     </div><!-- .col -->
@@ -194,8 +194,7 @@
                                                         <th class="tb-tnx-amount is-alt">
                                                             <span class="tb-tnx-total">Price</span>
                                                         </th>
-                                                      
-                                                        <th class="tb-tnx-amount is-alt">
+                                                        <th class="tb-tnx-date is-alt">
                                                             <span class="tb-tnx-total">Date</span>
                                                         </th>
                                                         <th class="tb-tnx-action">
@@ -210,10 +209,10 @@
                                                         <td class="tb-tnx-id">
                                                             <a ><span>{{ $num++ }}</span></a>
                                                         </td>
-                                                        <td class="tb-tnx-id">
+                                                        <td class="tb-tnx-amount">
                                                             <a ><span> ${{ number_format($vp->price,2) ?? '' }}</span></a>
                                                         </td>
-                                                        <td class="tb-tnx-id">
+                                                        <td class="tb-tnx-date">
                                                             <a ><span> {{ $vp->date ?? '' }} </span></a>
                                                         </td>
                                                             <td class="tb-tnx-action">

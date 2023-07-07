@@ -12,3 +12,9 @@
 .nk-app-root .nk-main .nk-content .card.card-bordered .card-inner .card-inner-left .card-heading-mm em.icon.ni.ni-edit {
     color: rgba(255,255,255, 0.7);
 }
+.fc-icon-left-single-arrow:after{
+    top: -90% !important;
+}
+.fc-icon-right-single-arrow:after{
+    top: -90% !important;
+}

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminDashController;
 use App\Http\Controllers\Admin\AmenitiesController;
 use App\Http\Controllers\Admin\VillaController;
 use App\Http\Controllers\Admin\PricingController;
+use App\Http\Controllers\Admin\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,4 +57,9 @@ Route::get('admin-dashboard/amenities',[AmenitiesController::class, 'index']);
 Route::post('admin-dashboard/amenities/amenities-add', [AmenitiesController::class, 'add']);
 Route::post('admin-dashboard/amenities/amenities-remove', [AmenitiesController::class, 'remove']);
 Route::post('admin-dashboard/amenities/amenities-update', [AmenitiesController::class, 'update']);
+
+// service
+Route::get('admin-dashboard/services',[ServiceController::class,'index']);
+Route::post('admin-dashboard/services/add',[ServiceController::class,'serviceadd'])->name('serviceadd');
+Route::post('admin-dashboard/services/delete',[ServiceController::class,'delete'])->name('servicedelete');
 });

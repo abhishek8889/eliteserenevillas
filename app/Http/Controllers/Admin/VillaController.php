@@ -22,8 +22,8 @@ class VillaController extends Controller
    public function addvillas(){
 
       $amenities = Amenities::get();
-      // dd($amenities);
-    return view('Admin.villas.addvillas');
+      
+    return view('Admin.villas.addvillas',compact('amenities'));
    }
    public function addProcc(Request $request){
       $request->validate([
