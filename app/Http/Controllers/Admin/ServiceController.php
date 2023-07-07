@@ -18,6 +18,10 @@ class ServiceController extends Controller
         // return $request->all();
         
         if($request->id){
+            $request->validate([
+                'name' =>'required',
+                'slug' => 'unique:servicelists,slug,'.$request->id,
+            ]);
             $services = Servicelist::find($request->id);
             $services->name = $request->name;
             $services->slug = $request->slug;

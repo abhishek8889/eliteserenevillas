@@ -67,7 +67,7 @@
                             <div class="form-control-wrap">
                                 <div class="form-file">
                                     <input type="file" multiple class="form-file-input" name="images[]" id="customMultipleFiles">
-                                    <label class="form-file-label" for="customMultipleFiles">Choose files</label>
+                                    <label class="form-file-label" for="">Choose files</label>
                                 </div>
                                 @if ($errors->has('images'))
                             <span class="text-danger">{{ $errors->first('images') }}</span>

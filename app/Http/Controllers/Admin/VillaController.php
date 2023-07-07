@@ -19,6 +19,7 @@ class VillaController extends Controller
 {
    public function index(){
       $villas = Villas::with('address','media')->get();
+      
      
       return view('Admin.villas.index',compact('villas'));
    }
@@ -111,8 +112,10 @@ class VillaController extends Controller
    public function villaView($slug){
          $villas = Villas::where('slug',$slug)->with('address','media')->first();
          $villas_pricing = Pricing::where('villa_id',$villas->id)->get();
-      
-         return view('Admin.villas.villaview',compact('villas','villas_pricing'));
+         $aminites = VillaAmenities::where('villa_id',$villas->id)->with('amenitie')->get();
+         $services = Service::where('villa_id',$villas->id)->with('service')->get();
+         $all_animites = VillaAmenities::get();
+         return view('Admin.villas.villaview',compact('villas','villas_pricing','all_animites','services','aminites'));
    }
    public function delete($id){
       $villas = Villas::find($id);
