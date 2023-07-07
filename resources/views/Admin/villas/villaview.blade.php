@@ -16,7 +16,7 @@
                             <!-- <h2 class="text-end" data-bs-toggle="modal" data-bs-target="#modalDefault123"><em class="icon ni ni-edit"></em></h2> -->
                             @foreach($villas['media'] as $media)
                             <div class="slider-item rounded">
-                                <img src="{{ url('villa_images/'.$media->media_name) }}" class="w-100 d-none classimg" alt="" >
+                                <img src="{{ url('villa_images/'.$media->media_name) }}" class="w-100 d-none classimg" alt="" id="classImg">
                             </div>
                             @endforeach
                         </div><!-- .slider-init -->
@@ -391,9 +391,10 @@
     $(document).ready(function (){
         $('.classimg').removeClass('d-none');
     });
-    // $(window).on('load', function(){
-    //     alert('a');
-    // });
+    $(window).on('load', function(){
+        // alert('a');
+        $('#classImg').removeClass('d-none');
+    });
 
 </script>
 <script>
