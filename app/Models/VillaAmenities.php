@@ -12,4 +12,5 @@ class VillaAmenities extends Model
     public function amenitie(){
             return $this->hasOne(Amenities::class,'id','amenitie_id');
     }
+    
 }

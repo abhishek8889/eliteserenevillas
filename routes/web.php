@@ -40,7 +40,9 @@ Route::get('admin-dashboard/export-data/{id}',[AdminDashController::class,'expor
 Route::get('admin-dashboard/villas',[VillaController::class,'index']);
 Route::get('admin-dashboard/add-Villas',[VillaController::class,'addvillas']);
 Route::post('admin-dashboard/addVillasProc',[VillaController::class,'addProcc'])->name('addVillasProc');
+Route::post('admin-dashboard/updateVillasProc',[VillaController::class,'updateProcc'])->name('updateVillasProc');
 
+Route::get('admin-dashboard/villa-update/{slug}',[VillaController::class,'updateVilla']);
 Route::get('admin-dashboard/villas/{slug}',[VillaController::class,'villaView']);
 Route::get('admin-dashboard/villas/delete/{id}',[VillaController::class,'delete']);
 Route::post('admin-dashboard/villas/update',[VillaController::class,'update']);
