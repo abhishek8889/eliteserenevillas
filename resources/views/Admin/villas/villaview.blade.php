@@ -123,14 +123,14 @@
                             </form> -->
 
                             <div class="product-meta">
-                                <ul class="d-flex flex-wrap ailgn-center g-2 pt-1">
+                                <!-- <ul class="d-flex flex-wrap ailgn-center g-2 pt-1">
 
                                     <li>
                                         <a href="{{ url('admin-dashboard/villas/delete/'.$villas->id) }}"> <button
                                                 class="btn btn-danger">Delete</button></a>
                                     </li>
 
-                                </ul>
+                                </ul> -->
                             </div>
                         </div><!-- .product-info -->
                     </div><!-- .col -->
@@ -194,8 +194,7 @@
                                                         <th class="tb-tnx-amount is-alt">
                                                             <span class="tb-tnx-total">Price</span>
                                                         </th>
-                                                      
-                                                        <th class="tb-tnx-amount is-alt">
+                                                        <th class="tb-tnx-date is-alt">
                                                             <span class="tb-tnx-total">Date</span>
                                                         </th>
                                                         <th class="tb-tnx-action">
@@ -210,10 +209,10 @@
                                                         <td class="tb-tnx-id">
                                                             <a ><span>{{ $num++ }}</span></a>
                                                         </td>
-                                                        <td class="tb-tnx-id">
+                                                        <td class="tb-tnx-amount">
                                                             <a ><span> ${{ number_format($vp->price,2) ?? '' }}</span></a>
                                                         </td>
-                                                        <td class="tb-tnx-id">
+                                                        <td class="tb-tnx-date">
                                                             <a ><span> {{ $vp->date ?? '' }} </span></a>
                                                         </td>
                                                             <td class="tb-tnx-action">
@@ -601,7 +600,8 @@ $(document).ready(function() {
                     _token: '{{csrf_token()}}'
                 },
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
+                    
                     $('#villa_name').html(val);
                 }
             })
@@ -676,11 +676,7 @@ var calendar = $('#calendar').fullCalendar({
     {
         start_date = moment(event.start._d, "YYYY-MM-DD HH:mm").format('DD MMMM');
         end_date = moment(event.end._d, "YYYY-MM-DD HH:mm").format('DD MMMM YYYY');
-        console.log(end_date);
-        console.log(event.title);
-        console.log(event.description);
-        console.log(event.start._d);
-        console.log(event.end._d);
+      
         $('#exampleModal').modal('show');
         $('#event_title').html(event.title);
         $('#event_date').html(start_date+' to '+end_date)

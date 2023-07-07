@@ -91,18 +91,18 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <!-- <li class="nk-menu-item has-sub">
+                                <li class="nk-menu-item has-sub">
                                     <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><i class="fas fa-network-wired"></i></span>
-                                        <span class="nk-menu-text">Genre</span>
+                                    <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+                                        <span class="nk-menu-text">Service</span>
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="{{url('/admin-dashboard/genre')}}" class="nk-menu-link"><span class="nk-menu-text">Genre List</span></a>
+                                            <a href="{{url('/admin-dashboard/services')}}" class="nk-menu-link"><span class="nk-menu-text">Services List</span></a>
                                         </li>
-
+                                        
                                     </ul>
-                                </li> -->
+                                </li>
                                
                              
                             </ul>

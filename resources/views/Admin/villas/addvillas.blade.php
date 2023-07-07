@@ -79,6 +79,23 @@
                              @endif
                             </div>
                          </div>
+                         <div class="form-group">
+                                 <label class="form-label">Amenities</label>
+                                 <div class="form-control-wrap">
+                                     <select class="form-select js-select2" multiple="multiple" data-placeholder="Select Multiple Amenities">
+                                         <option value="default_option">Default Option</option>
+                                         @foreach($amenities as $a)
+                                         <option value="{{ $a->id ?? '' }}">{{ $a->name ?? '' }}</option>
+                                         @endforeach
+                                     </select>
+                                 </div>
+                         </div>
+                         <div class="form-group">
+                             <label class="form-label" for="default-textarea">Description</label>
+                             <div class="form-control-wrap">
+                                 <textarea class="form-control no-resize" id="default-textarea"></textarea>
+                             </div>
+                         </div>
                     </div>
                      </form>
                    

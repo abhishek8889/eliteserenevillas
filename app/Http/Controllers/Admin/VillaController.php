@@ -7,7 +7,8 @@ use App\Models\Villas;
 use App\Models\Address;
 use App\Models\Media;
 use App\Models\Pricing;
-use App\Models\Event;
+use App\Models\Reservation;
+use App\Models\Amenities;
 use Auth;
 use DB;
 use Illuminate\Support\Facades\File;
@@ -20,7 +21,9 @@ class VillaController extends Controller
    }
    public function addvillas(){
 
-    return view('Admin.villas.addvillas');
+      $amenities = Amenities::get();
+      
+    return view('Admin.villas.addvillas',compact('amenities'));
    }
    public function addProcc(Request $request){
       $request->validate([
@@ -30,7 +33,7 @@ class VillaController extends Controller
          'city' => 'required',
          'state' => 'required',
          'country_name' => 'required',
-         'images' => 'required|image',
+         // 'images' => '',
       ]);
 
       $villas = new Villas;
@@ -94,10 +97,10 @@ class VillaController extends Controller
    }
    public function update(Request $request){
       if($request->val){
-      $slug = strtolower(str_replace(" ","-",$request->val));
+      // $slug = strtolower(str_replace(" ","-",$request->val));
       $update = Villas::find($request->id);
       $update->name = $request->val;
-      $update->slug = $slug;
+      // $update->slug = $slug;
       $update->update();
       return response()->json('successfully updated villas name');
       }
@@ -141,12 +144,12 @@ class VillaController extends Controller
       }
    }
    public function calendar($id){
-      $events = Event::where('villa_id',$id)->get();
+      $events = Reservation::where('villa_id',$id)->get();
      $data = array();
       foreach($events as $event){
       $data[] =  array(
          'id'       => $event->id,
-         'title'    =>  $event->event,
+         'title'    =>  $event->title,
          'start'    =>  $event->start,
          'end'      =>  $event->end,
          'status'   =>  '1',

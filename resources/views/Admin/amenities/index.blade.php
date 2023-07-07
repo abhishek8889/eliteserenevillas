@@ -109,7 +109,7 @@
         });
         $("body").delegate(".titleName", "keyup", function(e) {
         // $('.titleName').on('keyup', function (){
-            console.log($(this).attr('data-id'));
+            // console.log($(this).attr('data-id'));
             var id = $(this).attr('data-id');
             let name = $(this).val().toLowerCase();
             let slug = name.replace(/ /g, "-");
@@ -136,7 +136,7 @@
                     _token: '{{csrf_token()}}'
                 },
             success: function(response) {
-                console.log(response);
+                // console.log(response);
                 $('#amenitiesName').val('');
                 $('#amenitiesSlug').val('');
                 NioApp.Toast(response, 'info', {position: 'top-right'});

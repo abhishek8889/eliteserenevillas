@@ -65,8 +65,8 @@
                                                                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                                                         <ul class="link-list-plain">
                                                                             <li><a href="{{ url('admin-dashboard/villas/'.$v->slug) }}">View</a></li>
-                                                                            <!-- <li><a href="#">Edit</a></li>
-                                                                            <li><a href="#">Export</a></li> -->
+                                                                           <li><a class="delete_villas" link="{{ url('admin-dashboard/villas/delete/'.$v->id) }}">delete</a></li>
+                                                                          <!--  <li><a href="#">Export</a></li> -->
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -81,5 +81,25 @@
                                                 </div>
                                             </div><!-- .card -->
                                         </div>
+                                        <script>
+                                            $(document).ready(function(){
+                                                $('.delete_villas').click(function(){
+                                                   link = $(this).attr('link');
+                                                   Swal.fire({
+                                                        title: 'Do you want to delete this listing ?',
+                                                        icon: 'error',
+                                                        showCancelButton: true,
+                                                        confirmButtonText: 'yes',
+                                                        confirmButtonColor: '#008000',
+                                                        cancelButtonText: 'no',
+                                                        cancelButtonColor: '#d33',
+                                                        }).then((result) => {
+                                                        if (result.isConfirmed) {
+                                                            window.location.href = link;
+                                                        } 
+                                                        }); 
+                                                });
+                                            });
+                                        </script>
 
 @endsection
