@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class VillaAmenities extends Model
 {
     use HasFactory;
+
+    public function amenitie(){
+            return $this->hasOne(Amenities::class,'id','amenitie_id');
+    }
     
 }

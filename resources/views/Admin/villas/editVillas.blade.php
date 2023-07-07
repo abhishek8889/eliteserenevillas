@@ -80,12 +80,10 @@
                                          <!-- <option value="default_option">Default Option</option> -->
                                          @foreach($amenities as $a)
                                             <option value="{{ $a->id ?? '' }}"
-                                            <?php
-                                                for($x = 0; $x < count($villasData->amenities); $x++){
-                                                    if($a->id == $villasData->amenities[$x]->amenitie_id){
-                                                        print_r($a->id);
+                                                <?php
+                                                for($i = 0 ; $i < count($villasData->amenities) ; $i++){
+                                                    if($a->id == $villasData->amenities[$i]->amenitie_id){
                                                         echo ' selected ';
-                                                        print_r($villasData->amenities[$x]->id);
                                                     }
                                                 }
                                                 ?>     
@@ -103,7 +101,7 @@
                                 <input type="text" class="form-control" name="servicename[]" id="cf-full-name" 
                                 value="<?php 
                                 for($s = 0; $s < count($villasData->service); $s++){
-                                    if($service->id == $villasData->service[$s]->id){
+                                    if($service->id == $villasData->service[$s]->service_id){
                                         echo $villasData->service[$s]->value;
                                     }
                                 }

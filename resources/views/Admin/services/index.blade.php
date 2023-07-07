@@ -40,7 +40,7 @@
 <div class="nk-block nk-block-lg my-4">
     <div class="nk-block-head">
         <div class="nk-block-head-content">
-            <h4 class="nk-block-title">AMENITIES LIST</h4>
+            <h4 class="nk-block-title">SERVICES LIST</h4>
         </div>
     </div>
     <div class="card card-bordered card-preview">
@@ -130,8 +130,11 @@ $(document).ready(function(){
                     _token: '{{csrf_token()}}'
                 },
             success: function(response) {
-                $('#name').val('');
-                $('#slug').val('');
+                    $('#id').val('');
+                    $('#name').val('');
+                    $('#slug').val('');
+                    $('.add-new').addClass('d-none');
+                    $('#button_value').html('Add');
                 NioApp.Toast(response, 'info', {position: 'top-right'});
                 $("#table").load(location.href + " #table");
             },

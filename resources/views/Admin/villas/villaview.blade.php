@@ -1,6 +1,9 @@
 @extends('admin_layout/index')
 @section('content')
   
+<div class="loader-wrapper" id="loader-1">
+        <div id="loader"></div>
+    </div>
 <div class="nk-block">
     <div class="card card-bordered">
         <!-- <h2 class="text-end" data-bs-toggle="modal" data-bs-target="#modalDefault123"><em class="icon ni ni-edit"></em>
@@ -134,7 +137,8 @@
                             </div>
                         </div><!-- .product-info -->
                     </div><!-- .col -->
-                </div><!-- .row -->
+                                </div><!-- .row -->
+                           
                                         <!-- start pricing -->
                                         <div class="nk-block-head  d-flex justify-content-between">
                                             <div class="nk-block-head-content">
