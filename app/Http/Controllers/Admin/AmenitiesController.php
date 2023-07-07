@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Amenities;
 use Auth;
+use App\Models\Villas;
+
 class AmenitiesController extends Controller
 {
     //

@@ -16,7 +16,7 @@
                             <!-- <h2 class="text-end" data-bs-toggle="modal" data-bs-target="#modalDefault123"><em class="icon ni ni-edit"></em></h2> -->
                             @foreach($villas['media'] as $media)
                             <div class="slider-item rounded">
-                                <img src="{{ url('villa_images/'.$media->media_name) }}" class="w-100 d-none classimg" alt="" >
+                                <img src="{{ url('villa_images/'.$media->media_name) }}" class="w-100 d-none classimg" alt="" id="classImg">
                             </div>
                             @endforeach
                         </div><!-- .slider-init -->
@@ -390,9 +390,10 @@
     $(document).ready(function (){
         $('.classimg').removeClass('d-none');
     });
-    // $(window).on('load', function(){
-    //     alert('a');
-    // });
+    $(window).on('load', function(){
+        // alert('a');
+        $('#classImg').removeClass('d-none');
+    });
 
 </script>
 <script>
@@ -679,7 +680,25 @@ var calendar = $('#calendar').fullCalendar({
         $('#exampleModal').modal('show');
         $('#event_title').html(event.title);
         $('#event_date').html(start_date+' to '+end_date)
-        $('#event_description').html(event.description);
+        var descriptionData = $('#event_description').html(event.description);
+        console.warn(descriptionData.html());
+        var checkUrl = /(https?:\/\/[^\s]+)/g;
+        var  url = '';
+        url = descriptionData.html().match(checkUrl);
+        const phoneNumber = /Phone Number \(Last 4 Digits\): (\d{4})/;
+        const matches = phoneNumber.exec(descriptionData.html());
+        var number = '';
+        if (matches && matches.length > 1) {
+            number = matches[1];
+        // console.log("Phone Number : "+number); 
+        }
+        $('#event_description').html(''); 
+        if(url != null && url != "") {
+            $('#event_description').append(" Reservation URL:"+"<a href='"+url+"'>"+url+"</a><br>");
+        }
+        if(number != "" && number != null) {
+            $('#event_description').append("Phone Number : "+number+ ".");
+        }
 
     },
 });
