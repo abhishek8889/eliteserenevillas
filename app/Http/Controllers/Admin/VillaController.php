@@ -9,6 +9,9 @@ use App\Models\Media;
 use App\Models\Pricing;
 use App\Models\Reservation;
 use App\Models\Amenities;
+use App\Models\VillaAmenities;
+use App\Models\Servicelist;
+use App\Models\Service;
 use Auth;
 use DB;
 use Illuminate\Support\Facades\File;
@@ -22,10 +25,13 @@ class VillaController extends Controller
    public function addvillas(){
 
       $amenities = Amenities::get();
+      $services = Servicelist::get();
       
-    return view('Admin.villas.addvillas',compact('amenities'));
+    return view('Admin.villas.addvillas',compact('amenities','services'));
    }
    public function addProcc(Request $request){
+      $services = Servicelist::get();
+     
       $request->validate([
          'villaname' => 'required',
          'slug' => 'required|unique:villas',
@@ -40,6 +46,7 @@ class VillaController extends Controller
       $villas->name = $request->villaname;
       $villas->user_id = Auth::user()->id;
       $villas->slug = $request->slug;
+      $villas->description = $request->description;
       $villas->save();
 
       if($villas->save()){
@@ -50,6 +57,7 @@ class VillaController extends Controller
          $address->state = $request->state;
          $address->country = $request->country_name;
          $address->save();
+         
          if($request->hasFile('images')){
             $file = $request->file('images');
             foreach($file as $f){
@@ -70,11 +78,31 @@ class VillaController extends Controller
                $media->media_name = 'default-image.jpg';
                $media->media_url = url('public/villa_images/'.'default-image.jpg');
                $media->save();
+               $media_ids = $media->id;
          }
          $villas_update = Villas::find($villas->id);
          $villas_update->Location_id = $address->id;
-         $villas_update->banner_id = json_encode([$media['id']]);
+         $villas_update->banner_id = $media_ids[0];
          $villas_update->update();
+
+         if($request->amemities){
+            foreach($request->amemities as $amenites){
+               $aminites = new VillaAmenities;
+               $aminites->villa_id = $villas->id;
+               $aminites->amenitie_id = $amenites;
+               $aminites->save();
+            }
+         }
+         if($request->servicename){
+            for ($i=0; $i < count($request->servicename); $i++) { 
+               $service = new Service;
+               $service->service_id = $services[$i]['id'];
+               $service->value = $request->servicename[$i];
+               $service->villa_id = $villas->id;
+               $service->save();
+            }
+         }
+
          return redirect()->back()->with(['success'=>'successfully saved villas']);
       }else{
          return redirect()->back()->with(['error'=>'successfully saved villas']);
