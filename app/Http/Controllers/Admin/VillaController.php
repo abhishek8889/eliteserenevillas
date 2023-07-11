@@ -12,6 +12,8 @@ use App\Models\Amenities;
 use App\Models\VillaAmenities;
 use App\Models\Servicelist;
 use App\Models\Service;
+use App\Models\CustomDetail;
+use App\Models\Category;
 use Auth;
 use DB;
 use Illuminate\Support\Facades\File;
@@ -20,17 +22,17 @@ class VillaController extends Controller
    public function index(){
       $villas = Villas::with('address','media')->get();
       
-     
       return view('Admin.villas.index',compact('villas'));
    }
    public function addvillas(){
-
+      $categories = Category::get();
       $amenities = Amenities::get();
       $services = Servicelist::get();
       
-    return view('Admin.villas.addvillas',compact('amenities','services'));
+    return view('Admin.villas.addvillas',compact('amenities','services','categories'));
    }
    public function addProcc(Request $request){
+     
       $services = Servicelist::get();
      
       $request->validate([
@@ -48,6 +50,9 @@ class VillaController extends Controller
       $villas->user_id = Auth::user()->id;
       $villas->slug = $request->slug;
       $villas->description = $request->description;
+      $villas->min_guest = $request->min_guest;
+      $villas->max_guest = $request->min_guest;
+      $villas->category_id = $request->cat_id;
       $villas->save();
 
       if($villas->save()){
@@ -57,6 +62,8 @@ class VillaController extends Controller
          $address->city = $request->city;
          $address->state = $request->state;
          $address->country = $request->country_name;
+         $address->longitude = $request->Longitude;
+         $address->latitude = $request->Latitude;
          $address->save();
          
          if($request->hasFile('images')){
@@ -101,6 +108,16 @@ class VillaController extends Controller
                $service->value = $request->servicename[$i];
                $service->villa_id = $villas->id;
                $service->save();
+            }
+         }
+
+         if($request->Customtitle){
+            for ($i=0; $i < count($request->Customtitle) ; $i++) { 
+             $customedetail = new CustomDetail;
+             $customedetail->title = $request->Customtitle[$i];
+             $customedetail->description = $request->customedescription[$i];
+             $customedetail->villa_id = $villas->id;
+             $customedetail->save();
             }
          }
 
@@ -311,6 +328,7 @@ class VillaController extends Controller
      
       return redirect()->back()->with('success', 'Villa has been updated');
    }
+   
   }
   
 

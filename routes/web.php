@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AmenitiesController;
 use App\Http\Controllers\Admin\VillaController;
 use App\Http\Controllers\Admin\PricingController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Front\FrontVillas;
 
 /*
@@ -65,6 +66,11 @@ Route::post('admin-dashboard/amenities/amenities-update', [AmenitiesController::
 Route::get('admin-dashboard/services',[ServiceController::class,'index']);
 Route::post('admin-dashboard/services/add',[ServiceController::class,'serviceadd'])->name('serviceadd');
 Route::post('admin-dashboard/services/delete',[ServiceController::class,'delete'])->name('servicedelete');
+
+//categories
+Route::get('admin-dashboard/catgories',[CategoryController::class,'index']);
+Route::post('admin-dashboard/catgories/add',[CategoryController::class,'catgoriesadd'])->name('catgoriesadd');
+Route::post('admin-dashboard/catgories/delete',[CategoryController::class,'delete'])->name('catgoriesdelete');
 });
 
 
