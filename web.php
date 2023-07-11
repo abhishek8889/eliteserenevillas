@@ -7,7 +7,6 @@ use App\Http\Controllers\Admin\AmenitiesController;
 use App\Http\Controllers\Admin\VillaController;
 use App\Http\Controllers\Admin\PricingController;
 use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Front\FrontVillas;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,8 +65,3 @@ Route::get('admin-dashboard/services',[ServiceController::class,'index']);
 Route::post('admin-dashboard/services/add',[ServiceController::class,'serviceadd'])->name('serviceadd');
 Route::post('admin-dashboard/services/delete',[ServiceController::class,'delete'])->name('servicedelete');
 });
-
-
-/////front
-Route::get('villas-list',[FrontVillas::class,'index']);
-Route::get('villas-list/villas-view/{slug}',[FrontVillas::class,'villaview']);

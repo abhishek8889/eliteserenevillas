@@ -21,4 +21,7 @@ class Villas extends Model
     public function service(){
         return $this->hasMany(Service::class,'villa_id','id');
     }
+    public function villafeatureimage(){
+        return $this->hasOne(Media::class,'id','banner_id');
+    }
 }
