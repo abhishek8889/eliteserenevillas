@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\AmenitiesController;
 use App\Http\Controllers\Admin\VillaController;
 use App\Http\Controllers\Admin\PricingController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Front\FrontVillas;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +24,17 @@ use App\Http\Controllers\Admin\ServiceController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::get('test',[FrontVillas::class,'test']);
+
 Route::get('/' ,function(){
     return view('welcome');
 });
 Route::get('/admin-login',[AuthenticationController::class,'index']);
 Route::post('/loginprocc',[AuthenticationController::class,'loginProcc']);
 Route::get('/logout',[AuthenticationController::class,'logout']);
+
+
 
 
 //admin
@@ -41,6 +48,8 @@ Route::get('admin-dashboard/villas',[VillaController::class,'index']);
 Route::get('admin-dashboard/add-Villas',[VillaController::class,'addvillas']);
 Route::post('admin-dashboard/addVillasProc',[VillaController::class,'addProcc'])->name('addVillasProc');
 Route::post('admin-dashboard/updateVillasProc',[VillaController::class,'updateProcc'])->name('updateVillasProc');
+Route::post('admin-dashboard/addcustome',[VillaController::class,'addcustome'])->name('addcustome');
+Route::post('admin-dashboard/cutomedelete',[VillaController::class,'cutomedelete'])->name('cutomedelete');
 
 Route::get('admin-dashboard/villa-update/{slug}',[VillaController::class,'updateVilla']);
 Route::get('admin-dashboard/villas/{slug}',[VillaController::class,'villaView']);
@@ -64,4 +73,15 @@ Route::post('admin-dashboard/amenities/amenities-update', [AmenitiesController::
 Route::get('admin-dashboard/services',[ServiceController::class,'index']);
 Route::post('admin-dashboard/services/add',[ServiceController::class,'serviceadd'])->name('serviceadd');
 Route::post('admin-dashboard/services/delete',[ServiceController::class,'delete'])->name('servicedelete');
+
+//categories
+Route::get('admin-dashboard/catgories',[CategoryController::class,'index']);
+Route::post('admin-dashboard/catgories/add',[CategoryController::class,'catgoriesadd'])->name('catgoriesadd');
+Route::post('admin-dashboard/catgories/delete',[CategoryController::class,'delete'])->name('catgoriesdelete');
 });
+
+
+/////front
+Route::get('villas',[FrontVillas::class,'index']);
+Route::get('villas/{slug}',[FrontVillas::class,'villaview']);
+Route::get('villas/calendar/{id}',[FrontVillas::class,'calendar']);

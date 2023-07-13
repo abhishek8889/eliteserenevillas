@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('description');
+            $table->integer('category_id');
+            $table->integer('min_guest');
+            $table->integer('max_guest');
             $table->string('location_id')->nullable(); // get from Location table. 
             $table->string('banner_id')->nullable(); // get from media table
             $table->timestamps();

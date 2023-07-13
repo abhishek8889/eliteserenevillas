@@ -23,6 +23,13 @@
                                     placeholder="Service Name">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="form-label" for="fav_icon">fav icon</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" name="fav_icon" id="fav_icon"
+                                    placeholder="Fav icon">
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <button type="button" class="btn btn-primary add" id="add"><span id="button_value">Add</span></button>
@@ -58,6 +65,11 @@
                             <span>Amenities Slug</span>
                         </span>
                     </th>
+                    <th class="tb-tnx-info">
+                        <span class="tb-tnx-desc d-none d-sm-inline-block">
+                            <span>fav icon</span>
+                        </span>
+                    </th>
                     <th class="tb-tnx-action">
                         <span>Action</span>
                     </th>
@@ -81,13 +93,19 @@
                         </div>
                        
                     </td>
+                    <td class="tb-tnx-info">
+                        <div class="tb-tnx-desc">
+                           {{ $service->fav_icon ?? '' }} 
+                        </div>
+                       
+                    </td>
                     <td class="tb-tnx-action">
                         <div class="dropdown drop>
                             <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em
                                     class="icon ni ni-more-h"></em></a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                 <ul class="link-list-plain">
-                                    <li><a href="#" data-id ="{{$service->id ?? ''  }}"data-name = "{{ $service->name ?? '' }}" data-slug ="{{ $service->slug ?? '' }}" class="edit-services" >Edit</a></li>
+                                    <li><a href="#" data-id ="{{$service->id ?? ''  }}"data-name = "{{ $service->name ?? '' }}" data-slug ="{{ $service->slug ?? '' }}" fav-icon = "{{ $service->fav_icon ?? '' }}" class="edit-services" >Edit</a></li>
                                     <li><a href="#" data-id ="{{$service->id ?? ''  }}"  class="remove-services" >Remove</a></li>
                                 </ul>
                             </div>
@@ -114,7 +132,8 @@ $(document).ready(function(){
         var name = $('#name').val();
         var slug = $('#slug').val();
         var id = $('#id').val();
-        console.log(name);
+        var fav = $('#fav_icon').val();
+        // console.log(name);
         if (name === '' || slug === '') {
             NioApp.Toast('Fields cannot be null', 'info', {position: 'top-right'});
             return false;
@@ -127,12 +146,14 @@ $(document).ready(function(){
                     name : name,
                     slug : slug,
                     id : id,
+                    fav_icon : fav,
                     _token: '{{csrf_token()}}'
                 },
             success: function(response) {
                     $('#id').val('');
                     $('#name').val('');
                     $('#slug').val('');
+                    $('#fav_icon').val('');
                     $('.add-new').addClass('d-none');
                     $('#button_value').html('Add');
                 NioApp.Toast(response, 'info', {position: 'top-right'});
@@ -161,9 +182,13 @@ $(document).ready(function(){
             id = $(this).attr('data-id');
             name = $(this).attr('data-name');
             slug = $(this).attr('data-slug');
+            icon = $(this).attr('fav-icon');
+
             $('#id').val(id);
             $('#name').val(name);
             $('#slug').val(slug);
+            $('#fav_icon').val(icon);
+
           $('#button_value').html('update');
           $('#add_new').removeClass('d-none');
           window.scrollTo(0, 0);
@@ -173,6 +198,7 @@ $(document).ready(function(){
             $('#id').val('');
             $('#name').val('');
             $('#slug').val('');
+            $('#fav_icon').val('');
             $(this).addClass('d-none');
             $('#button_value').html('Add');
             

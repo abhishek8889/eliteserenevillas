@@ -17,6 +17,10 @@
     <link id="skin-default" rel="stylesheet" href="{{ asset('admin-theme/assets/css/theme.css?ver=3.1.2') }}"> 
    
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 </head>
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
@@ -99,6 +103,18 @@
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
                                             <a href="{{url('/admin-dashboard/services')}}" class="nk-menu-link"><span class="nk-menu-text">Services List</span></a>
+                                        </li>
+                                        
+                                    </ul>
+                                </li>
+                                <li class="nk-menu-item has-sub">
+                                    <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+                                        <span class="nk-menu-text">Category</span>
+                                    </a>
+                                    <ul class="nk-menu-sub">
+                                        <li class="nk-menu-item">
+                                            <a href="{{url('/admin-dashboard/catgories')}}" class="nk-menu-link"><span class="nk-menu-text">Category List</span></a>
                                         </li>
                                         
                                     </ul>
@@ -279,6 +295,56 @@
             </div>
         </div>
     </div>
+    <script>
+        // ClassicEditor
+        //         .create( document.querySelector( '#editor-text1' ) )
+        //         .then( editor => {
+        //                                 console.log( editor );
+        //                         } )
+        //                         .catch( error => {
+        //                                 console.error( error );
+        //                         } );
+        // ClassicEditor
+        //         .create( document.querySelector( '#editor-text2' ) )
+        //         .then( editor => {
+        //                                 console.log( editor );
+        //                         } )
+        //                         .catch( error => {
+        //                                 console.error( error );
+        //                         } );
+        // ClassicEditor
+        //         .create( document.querySelector( '#editor-text3' ) )          
+        //         .then( editor => {
+        //                                 console.log( editor );
+        //                         } )
+        //                         .catch( error => {
+        //                                 console.error( error );
+        //                         } );
+    </script>
+    <script>
+        const editorIds = [];
+
+            // Get IDs of elements with class 'editor'
+            const elements = document.querySelectorAll('.editor');
+            elements.forEach((element, index) => {
+            const newId = `editor-text${index + 1}`;
+            element.id = newId;
+            editorIds.push(newId);
+            });
+
+            // Create editors dynamically
+            editorIds.forEach(editorId => {
+            ClassicEditor
+                .create(document.querySelector(`#${editorId}`))
+                .then(editor => {
+                console.log(editor);
+                })
+                .catch(error => {
+                console.error(error);
+                });
+            });
+
+    </script>
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('admin-theme/assets/js/bundle.js?ver=3.1.2')}}"></script>

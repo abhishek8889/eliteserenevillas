@@ -23,8 +23,10 @@ class ServiceController extends Controller
                 'slug' => 'unique:servicelists,slug,'.$request->id,
             ]);
             $services = Servicelist::find($request->id);
+            // return $services;
             $services->name = $request->name;
             $services->slug = $request->slug;
+            $services->fav_icon = $request->fav_icon;
             $services->update();
             return response()->json('Successfully updated data');
         }else{
@@ -35,6 +37,7 @@ class ServiceController extends Controller
         $services = new Servicelist;
         $services->name = $request->name;
         $services->slug = $request->slug;
+        $services->fav_icon = $request->fav_icon;
         $services->save();
         }
         return response()->json('Successfully saved data');

@@ -19,7 +19,7 @@
                             <!-- <h2 class="text-end" data-bs-toggle="modal" data-bs-target="#modalDefault123"><em class="icon ni ni-edit"></em></h2> -->
                             @foreach($villas['media'] as $media)
                             <div class="slider-item rounded">
-                                <img src="{{ url('villa_images/'.$media->media_name) }}" class="w-100 d-none classimg" alt="" id="classImg">
+                                <img src="{{ asset('villa_images/'.$media->media_name) }}" class="w-100 d-none classimg" alt="" id="classImg">
                             </div>
                             @endforeach
                         </div><!-- .slider-init -->
@@ -28,7 +28,7 @@
                             }'> @foreach($villas['media'] as $media)
                             <div class="slider-item">
                                 <div class="thumb d-none classimg">
-                                    <img src="{{ url('villa_images/'.$media->media_name) }}" alt="">
+                                    <img src="{{ asset('villa_images/'.$media->media_name) }}" alt="">
                                 </div>
                             </div>
                             @endforeach
@@ -261,7 +261,7 @@
                                                                         <div class="col-sm-6 col-lg-6 col-xxl-6 gallery{{ $media->id ?? '' }}">
                                                                             <div class="gallery card card-bordered">
                                                                                 <!-- <a class="gallery-image popup-image" href="{{ url('villa_images/'.$media->media_name) }}"> -->
-                                                                                    <img class="w-100 rounded-top" src="{{ url('villa_images/'.$media->media_name) }}" alt="">
+                                                                                    <img class="w-100 rounded-top" src="{{ asset('villa_images/'.$media->media_name) }}" alt="">
                                                                                 <!-- </a> -->
                                                                                 <div class="">
                                                                                     
@@ -441,7 +441,7 @@ $(document).ready(function() {
     $(document).ready(function (){
         $('.delete-image').on('click', function (e){
             e.preventDefault();
-            console.log($(this).attr('data-id'));
+            // console.log($(this).attr('data-id'));
             var media_id = $(this).attr('data-id');
             if($('.media'+media_id).prop('checked') == false){
             $.ajax({
@@ -647,10 +647,8 @@ $('.file_upload').change(function() {
 </script>
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-  <script>
+
+ <script>
 var calendar = $('#calendar').fullCalendar({
     displayEventEnd: false,
     displayEventStart: false,
