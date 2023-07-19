@@ -33,4 +33,10 @@ class Villas extends Model
     public function pricing(){
         return $this->hasMany(Pricing::class,'villa_id','id');
     }
+    public function  villasics(){
+        return $this->hasOne(VillaIcs::class,'villa_id','id');
+    }
+    public function destination(){
+        return $this->hasOne(Destination::class,'id','destination_id');
+    }
 }

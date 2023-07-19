@@ -8,7 +8,7 @@ use App\Models\Amenities;
 use Auth;
 use App\Models\Villas;
 
-class AmenitiesController extends Controller
+class AmenitiesController extends AdminBaseController
 {
     //
     public function index(){

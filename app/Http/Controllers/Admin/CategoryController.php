@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 
 
-class CategoryController extends Controller
+class CategoryController extends AdminBaseController
 {
     public function index(){
             $category = Category::get();

@@ -14,10 +14,12 @@ use App\Models\Servicelist;
 use App\Models\Service;
 use App\Models\CustomDetail;
 use App\Models\Category;
+use App\Models\Destination;
+use App\Models\VillaIcs;
 use Auth;
 use DB;
 use Illuminate\Support\Facades\File;
-class VillaController extends Controller
+class VillaController extends AdminBaseController
 {
    public function index(){
       $villas = Villas::with('address','media')->get();
@@ -28,8 +30,9 @@ class VillaController extends Controller
       $categories = Category::get();
       $amenities = Amenities::get();
       $services = Servicelist::get();
+      $destination = Destination::get();
       
-    return view('Admin.villas.addvillas',compact('amenities','services','categories'));
+    return view('Admin.villas.addvillas',compact('amenities','services','categories','destination'));
    }
    public function addProcc(Request $request){
      
@@ -47,6 +50,7 @@ class VillaController extends Controller
          'cat_id' => 'required',
          'Longitude' => 'required',
          'Latitude' => 'required',
+         'ics_url' => 'required',
          // 'images' => '',
       ]);
 
@@ -58,6 +62,7 @@ class VillaController extends Controller
       $villas->min_guest = $request->min_guest;
       $villas->max_guest = $request->max_guest;
       $villas->category_id = $request->cat_id;
+      $villas->destination_id = $request->destination;
       $villas->save();
 
       if($villas->save()){
@@ -128,6 +133,16 @@ class VillaController extends Controller
              $customedetail->save();
             }
          }
+         $file_path = public_path('icsfiles/listingics_'.$villas->id.'.ics');
+         $filename = 'listingics_'.$villas->id.'.ics';
+         File::put($file_path,'test');
+            $villasics = new VillaIcs;
+            $villasics->villa_id = $villas->id;
+            $villasics->ics_url = $request->ics_url;
+            $villasics->file_name = $filename;
+            $villasics->file_url = asset('icsfiles/'.$filename);
+            $villasics->save();
+
 
          return redirect()->back()->with(['success'=>'successfully saved villas']);
       }else{
@@ -256,7 +271,7 @@ class VillaController extends Controller
 
 
   public function updateVilla(Request $request, $villaSlug){
-   $villasData = Villas::where('slug',$villaSlug)->with('amenities','service','address','category','customedata')->first();
+   $villasData = Villas::where('slug',$villaSlug)->with('amenities','service','address','category','customedata','villasics')->first();
    // $villasData = Villas::where('slug',$villaSlug)->with('amenities','service','address')->first()->toArray();
    // echo '<pre>';
    // print_r($villasData);
@@ -265,12 +280,14 @@ class VillaController extends Controller
    $categories = Category::get();
    $amenities = Amenities::get();
    $services = Servicelist::get();
+   $destination = Destination::get();
    
-   return view('Admin.villas.editVillas',compact('amenities','services','villasData','categories'));
+   return view('Admin.villas.editVillas',compact('amenities','services','villasData','categories','destination'));
   }
 
   public function updateProcc(Request $request){
-   // dd($request->all());
+
+   // dd($viillas);
    $request->validate([
       'villaname' => 'required',
       'slug' => 'required|unique:villas,slug,' . $request->id,
@@ -283,6 +300,7 @@ class VillaController extends Controller
       'Longitude' => 'required',
       'Latitude' => 'required',
       'cat_id' => 'required',
+      'ics_url' => 'required',
       // 'images' => '',
    ]);
    
@@ -294,6 +312,7 @@ class VillaController extends Controller
    $villas->min_guest = $request->min_guest;
    $villas->max_guest = $request->max_guest;
    $villas->category_id = $request->cat_id;
+   $villas->destination_id = $request->destination;
    $villas->update();
    $villaAddress = Address::find($request->id);
    $villaAddress->city = $request->city;
@@ -304,7 +323,7 @@ class VillaController extends Controller
    $villaAddress->latitude = $request->Latitude;
    $villaAddress->update();
 
-       $delaminites = VillaAmenities::where(['villa_id' => $request->id])->delete();
+      $delaminites = VillaAmenities::where(['villa_id' => $request->id])->delete();
       $servicesAll = Service::where('villa_id', $request->id)->delete();
       $custome_data = CustomDetail::where('villa_id',$request->id)->delete();
       $services = Servicelist::get();
@@ -335,8 +354,25 @@ class VillaController extends Controller
           $customedetail->save();
          }
       }
+       
+      $icsupdate = VillaIcs::where('villa_id',$villas->id)->first();
+      if($icsupdate != null){
 
-     
+      $icsupdatess = VillaIcs::find($icsupdate->id);
+      $icsupdatess->ics_url = $request->ics_url;
+      $icsupdatess->update();
+      }else{
+   
+         $file_path = public_path('icsfiles/listingics_'.$villas->id.'.ics');
+         $filename = 'listingics_'.$villas->id.'.ics';
+         File::put($file_path,'test');
+            $villasics = new VillaIcs;
+            $villasics->villa_id = $villas->id;
+            $villasics->ics_url = $request->ics_url;
+            $villasics->file_name = $filename;
+            $villasics->file_url = asset('icsfiles/'.$filename);
+            $villasics->save();
+      }
       return redirect()->back()->with('success', 'Villa has been updated');
    }
    public function addcustome(Request $request){
