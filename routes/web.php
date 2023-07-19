@@ -8,7 +8,11 @@ use App\Http\Controllers\Admin\VillaController;
 use App\Http\Controllers\Admin\PricingController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Front\FrontVillas;
+use App\Http\Controllers\Front\SearchVillasController;
+use App\Http\Controllers\Front\FrontDestinationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +43,7 @@ Route::get('/logout',[AuthenticationController::class,'logout']);
 
 //admin
 Route ::group(['middleware' =>['admin']],function(){
-Route::get('/admin-dashboard',[AdminDashController::class,'index']);
+Route::get('/admin-dashboard',[AdminDashController::class,'index'])->name('admin-dashboard');
 Route::get('admin-dashboard/import',[AdminDashController::class,'import']);
 Route::post('admin-dasboard/import-data',[AdminDashController::class,'importproc'])->name('importproc');
 Route::get('admin-dashboard/export-data/{id}',[AdminDashController::class,'export']);
@@ -78,10 +82,22 @@ Route::post('admin-dashboard/services/delete',[ServiceController::class,'delete'
 Route::get('admin-dashboard/catgories',[CategoryController::class,'index']);
 Route::post('admin-dashboard/catgories/add',[CategoryController::class,'catgoriesadd'])->name('catgoriesadd');
 Route::post('admin-dashboard/catgories/delete',[CategoryController::class,'delete'])->name('catgoriesdelete');
+
+//destinations
+Route::get('admin-dashboard/destination/add/{id?}',[DestinationController::class,'index']);
+Route::get('admin-dashboard/destination',[DestinationController::class,'list']);
+Route::post('admin-dashboard/destination/addprocc',[DestinationController::class,'addDestinations'])->name('adddestinations');
+Route::get('admin-dashboard/destination/delete/{id}',[DestinationController::class,'delete']);
 });
 
 
 /////front
 Route::get('villas',[FrontVillas::class,'index']);
-Route::get('villas/{slug}',[FrontVillas::class,'villaview']);
+Route::get('villas/details/{slug}',[FrontVillas::class,'villaview']);
 Route::get('villas/calendar/{id}',[FrontVillas::class,'calendar']);
+
+// From /villax/search-result/
+Route::get('villas/search-result',[SearchVillasController::class,'index']);
+// Route::get('villas/search-result/?',[SearchVillasController::class,'index']);
+Route::get('villas/destinations',[FrontDestinationController::class,'index']);
+Route::get('villas/destinations/{slug}',[FrontDestinationController::class,'details']);

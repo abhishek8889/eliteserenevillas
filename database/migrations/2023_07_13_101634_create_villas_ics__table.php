@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('villa_ics', function (Blueprint $table) {
+        Schema::create('villas_ics', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('villa_id');
+            $table->string('ics_url');
+            $table->string('file_name');
+            $table->string('file_url');
+            $table->foreign('villa_id')->references('id')->on('villas')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('villa_ics');
+        Schema::dropIfExists('villas_ics');
     }
 };

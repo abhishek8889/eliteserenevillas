@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
             $table->string('heading');
+            $table->string('slug');
             $table->string('subheading');
             $table->string('description');
             $table->string('banner_img');

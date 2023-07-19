@@ -1,0 +1,993 @@
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("../fonts/TiemposHeadline-Semibold.woff2") format("woff2"),
+    url("../fonts/TiemposHeadline-Semibold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("../fonts/TiemposHeadline-Bold.woff2") format("woff2"),
+    url("../fonts/TiemposHeadline-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("../fonts/TiemposHeadline-SemiboldItalic.woff2") format("woff2"),
+    url("../fonts/TiemposHeadline-SemiboldItalic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("../fonts/TiemposHeadline-MediumItalic.woff2") format("woff2"),
+    url("../fonts/TiemposHeadline-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("../fonts/TiemposHeadline-BlackItalic.woff2") format("woff2"),
+    url("../fonts/TiemposHeadline-BlackItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("../fonts/TiemposHeadline-BoldItalic.woff2") format("woff2"),
+    url("../fonts/TiemposHeadline-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("../fonts/TiemposHeadline-Light.woff2") format("woff2"),
+    url("../fonts/TiemposHeadline-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("../fonts/TiemposHeadline-Medium.woff2") format("woff2"),
+    url("../fonts/TiemposHeadline-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("../fonts/TiemposHeadline-LightItalic.woff2") format("woff2"),
+    url("../fonts/TiemposHeadline-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("../fonts/TiemposHeadline-Regular.woff2") format("woff2"),
+    url("../fonts/TiemposHeadline-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Headline Regular";
+  src: url("../fonts/TiemposHeadline-RegularItalic.woff2") format("woff2"),
+    url("../fonts/TiemposHeadline-RegularItalic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("../fonts/TiemposHeadline-Black.woff2") format("woff2"),
+    url("../fonts/TiemposHeadline-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Heebo";
+  font-weight: 500;
+  color: #000;
+  font-size: 16px;
+  line-height: 1.5;
+}
+h2 {
+  font-family: "Tiempos Headline" !important;
+  font-size: 48px;
+  line-height: 54px;
+}
+h3 {
+  font-size: 28px;
+  font-family: "Tiempos Headline" !important;
+}
+h4 {
+  padding: 15px 0px;
+}
+p {
+  color: #626262;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+}
+h5 {
+  font-size: 16px;
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    transition: 0.4s;
+  }
+  to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    transition: 0.4s;
+  }
+  to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+.site-header.fixed-header {
+  -webkit-animation: fadeIn 0.75s ease-out forwards;
+  animation: fadeIn 0.75s ease-out forwards;
+}
+.site-header.fixed-header {
+  -webkit-animation: fadeIn 0.75s ease-out forwards;
+  animation: fadeIn 0.75s ease-out forwards;
+}
+.fixed-header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 999;
+  width: 100%;
+  background: transparent !important;
+  box-shadow: 0 4px 40px 1px rgba(0, 0, 0, 0.1);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+header .dropdown-toggle::after {
+  color: #a3a3a3;
+}
+
+header .navbar-light .navbar-nav .nav-link {
+  font-size: 16px;
+  color: #000;
+  font-weight: 500;
+  line-height: 1.5;
+}
+header .header-links {
+  justify-content: flex-end;
+  display: flex;
+  gap: 10px;
+}
+header .header-links p {
+  margin: 0;
+  color: #b3b3b3;
+  display: flex;
+  align-items: center;
+}
+.top-btn a:hover {
+  background: #90b0b7 !important;
+  color: #fff;
+  text-decoration: none;
+}
+header .header-links p a {
+  color: #90b0b7;
+  text-decoration: none;
+  margin-left: 3px;
+}
+header .nav-item {
+  padding: 22px 5px;
+}
+header .social-link i {
+  font-size: 20px;
+  height: 38px;
+  width: 38px;
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #90b0b7;
+}
+.breadcrumb-sec .breadcrumb-item a:hover {
+  color: #90b0b7 !important;
+  text-decoration: none;
+}
+.breadcrumb-sec {
+  background-color: #ebf3f5;
+}
+.breadcrumb-sec .breadcrumb-item {
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.breadcrumb-sec .breadcrumb {
+  padding: 20px 30px;
+  justify-content: center;
+  align-items: center;
+  color: #4f4f4f;
+}
+
+.breadcrumb-sec .breadcrumb-item a {
+  color: #4f4f4f;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">";
+  color: #a3a3a3;
+  font-size: 15px;
+}
+header .social-link i:hover {
+  background: #ebf3f5;
+}
+.gallery-slider-sec .gallery {
+  display: inline-block;
+  padding: 0px 15px;
+}
+.gallery-content .slick-list {
+  padding: 0px 150px !important;
+}
+.slick-dots li button:before {
+  color: #fff;
+}
+.slick-dots li.slick-active button:before {
+  opacity: 0.75;
+  color: #fff;
+  font-size: 12px;
+}
+.slick-dots {
+  bottom: 15px;
+}
+section.gallery-slider-sec {
+  position: relative;
+}
+.view-gallery-btn {
+  display: flex;
+  align-items: center;
+  z-index: 99;
+  padding: 10px 15px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-transition: all ease 0.2s;
+  transition: all ease 0.2s;
+  margin-left: 10px;
+}
+.view-gallery-btn a {
+  color: #fff;
+}
+.top-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 15%;
+  top: 5%;
+}
+.view-gallery-btn span:last-child {
+  font-size: 20px;
+  margin-left: 20px;
+}
+.slick-slide img {
+  display: block;
+  width: 100%;
+}
+button.slide-arrow {
+  position: absolute;
+  z-index: 99;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 60px;
+}
+
+.gallery-content {
+  position: relative;
+}
+
+button.slide-arrow.prev-arrow.slick-arrow {
+  top: 50%;
+  left: 2%;
+}
+
+button.slide-arrow.next-arrow.slick-arrow {
+  right: 2%;
+  bottom: 40%;
+}
+
+button.slide-arrow:focus-visible,
+button.slide-arrow:focus {
+  outline: none;
+}
+.villa-maika-content {
+  position: relative;
+  border-bottom: 1px solid rgb(232, 232, 232);
+  padding-bottom: 60px;
+}
+.villa-maika-content .villa {
+  display: flex;
+  justify-content: space-between;
+}
+.villa-maika-content .villa i {
+  font-size: 20px;
+  color: #727272;
+}
+
+.villa-maika-content .villa span {
+  padding-left: 6px;
+}
+.villa-maika-content .share-option {
+  position: relative;
+}
+.villa-maika-content .share-option:hover .show-links {
+  display: block;
+  position: absolute;
+}
+.villa-maika-content .show-links {
+  position: absolute;
+  left: 36px;
+  display: none;
+  transition: all 0.2s linear;
+}
+
+.villa-maika-content .show-links div {
+  padding-bottom: 10px;
+}
+.villa-maika-content .show-links div i {
+  color: #000 !important;
+}
+.villa-maika-content .address span {
+  color: #b0b0b0;
+}
+.villa-maika-content .items {
+  display: flex;
+}
+.villa-maika-content .items .item {
+  margin-right: 35px;
+}
+.villa-maika-content .items .item i {
+  color: #95b4ba;
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+.villa-maika-content .items .item.star i {
+  color: #cabba1;
+}
+.moretext {
+  display: none;
+}
+.villa-maika-content h3 {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+.villa-maika-content .disc button {
+  margin: auto;
+  display: block;
+  border: none;
+  background: transparent;
+  position: relative;
+}
+
+.villa-maika-content .disc button:hover::after {
+  color: #90b0b7;
+}
+.villa-maika-content .disc button:hover:after {
+  color: #90b0b7 !important;
+}
+.villa-maika-content .disc button:hover {
+  color: #90b0b7;
+}
+.villa-maika-content .border-btm {
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 30px;
+}
+.villa-maika-content .disc button:focus-visible,
+.villa-maika-content .disc button:focus {
+  outline: none !important;
+  border: none !important;
+}
+.villa-maika-content .location iframe {
+  width: 100%;
+}
+.villa-maika-content .amenities span {
+  font-weight: 400;
+  line-height: 40px;
+}
+.villa-maika-content .amenities span:first-child,
+.villa-maika-content .amenities .inactive i {
+  margin-right: 20px;
+  font-size: 18px;
+}
+.villa-maika-content .amenities div {
+  padding-bottom: 10px;
+}
+.villa-maika-content .amenities .inactive {
+  color: #727272;
+}
+.villa-maika-content .check span:last-child {
+  color: #727272;
+}
+.villa-maika-content .share span span {
+  text-decoration: underline;
+  color: #565656;
+}
+.villa-maika-content .share span:first-child span:hover {
+  color: #90b0b7;
+}
+.villa-maika-content .disc #more {
+  display: none;
+}
+.villa-maika-content .booking-sec {
+  border-style: solid;
+  border-width: 0 1px 1px;
+  border-color: #e8e8e8;
+  box-shadow: 0 10px 0 0 #a6c3c9 inset;
+  transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+  padding: 50px;
+}
+.booking-sec div {
+  padding: 10px 0px;
+}
+
+.villa-maika-content .booking-sec .from {
+  border-bottom: 1px solid rgb(232, 232, 232);
+}
+.villa-maika-content .from span:nth-child(2) {
+  padding-left: 4px;
+  color: #90b0b7;
+  font-size: 20px;
+  line-height: 28px;
+}
+.villa-maika-content .from span:nth-child(3) {
+  font-size: 14px;
+  color: #90b0b7;
+}
+.villa-maika-content .booking-sec .title {
+  color: #000;
+  border: 1px solid rgb(232, 232, 232);
+  padding: 15px;
+}
+.villa-maika-content .booking-sec .title input {
+  width: 100%;
+  border: none;
+}
+.villa-maika-content .booking-sec .title input::placeholder {
+  color: #000;
+  font-weight: 500;
+}
+.villa-maika-content .booking-sec p {
+  margin: 0;
+  font-size: 14px;
+}
+.villa-maika-content .booking-sec .checkin {
+  padding-top: 10px !important;
+}
+.service-check {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.villa-maika-content .extr-services .checkbox div {
+  padding: 2px;
+  font-weight: 400;
+}
+.villa-maika-content .extr-services .checkbox label {
+  color: #626262;
+  cursor: pointer;
+}
+.bookbtn {
+  display: block;
+  margin-top: 25px;
+}
+.bookbtn .button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #90b0b7;
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  padding: 21px 20px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+.bookbtn .button span {
+  z-index: 2;
+}
+
+.bookbtn .button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: -50px;
+  transform: translate3d(-90%, 0, 0);
+  background-color: #000;
+  z-index: 1;
+  transition: all 0.5s ease;
+}
+.bookbtn .button:hover {
+  color: white;
+}
+.bookbtn .button:hover:before {
+  transform: translate3d(0, 0, 0);
+}
+.villa-maika-content .need-help {
+  text-align: center;
+}
+.villa-maika-content .need-help p {
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px !important;
+  color: rgb(79, 79, 79);
+}
+.villa-maika-content .need-help a {
+  text-align: center;
+  color: #cabba1;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+input[type="checkbox"]:checked {
+  accent-color: #90b0b7;
+  background: #fff !important;
+}
+.villa-maika-content .view-list {
+  position: absolute;
+  width: 260px;
+  background-color: #fff;
+  z-index: 10;
+  top: -10px;
+  right: 100%;
+  left: auto;
+  margin-right: 10px;
+  text-align: left;
+  border-color: var(--border);
+  padding: 10px !important;
+  box-sizing: border-box;
+  box-shadow: 0 0 60px rgba(6, 30, 98, 0.08);
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  display: none;
+  -ms-transform: translateX(-1rem);
+  -webkit-transform: translateX(-1rem);
+  transform: translateX(-1rem);
+}
+.villa-maika-content .extr-services .service-check label:focus .view-list {
+  display: block !important;
+}
+.villa-maika-content .view-inner {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(79, 79, 79);
+}
+.review-box {
+  display: flex;
+}
+.profile img {
+  border-radius: 50%;
+  margin-right: 20px;
+  height: 60px;
+  width: 60px;
+}
+.review-box .name-info {
+  display: flex;
+  align-items: center;
+}
+.review-box .review-head h5 {
+  margin: 0;
+}
+.review-box .star {
+  font-size: 20px;
+  color: #fa8c17;
+}
+
+.review-box .name-info span {
+  font-size: 14px;
+  color: #a3a3a3;
+}
+.review-box {
+  display: flex;
+  padding: 30px 0px;
+  border-top: 1px solid rgb(232, 232, 232);
+}
+.villa-maika-content .comment-box {
+  background: #90b0b7;
+  display: inline-block;
+}
+
+.villa-maika-content .comment-box a {
+  display: inline-block;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 5px 20px;
+  color: #fff;
+}
+.add-block input,
+textarea {
+  padding: 20px 10px;
+  width: 100%;
+  border: 1px solid rgb(232, 232, 232);
+  margin-bottom: 20px;
+}
+.add-block input::placeholder,
+textarea::placeholder {
+  color: #000;
+  font-weight: 500;
+}
+.confirm-box input {
+  width: unset;
+}
+.confirm-box {
+  margin-left: 15px;
+}
+
+.confirm-box label {
+  color: #4f4f4f;
+}
+
+.add-block .star {
+  font-size: 20px;
+  color: rgb(250, 140, 23);
+}
+.submit-btn {
+  display: inline-block;
+  background: #90b0b7;
+  cursor: pointer;
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  padding: 8px 5px;
+  font-size: 14px;
+  transition: all 0.5s ease;
+  border: none;
+  outline: none;
+}
+.submit-btn:hover {
+  outline: none;
+  border: none;
+}
+.submit-btn i {
+  width: 50px;
+  height: 50px;
+  color: var(--accent);
+  background-color: #fff;
+  color: #000;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  margin-left: 30px;
+}
+.submit-btn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: -50px;
+  transform: translate3d(-90%, 0, 0);
+  background-color: #000;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+.submit-btn:hover:before {
+  transform: translate3d(0, 0, 0);
+}
+.submit-btn span,
+.submit-btn i {
+  z-index: 99;
+  position: relative;
+}
+.nearby-sec {
+  padding: 40px 0px;
+}
+section.nearby-sec a {
+  color: #000;
+  font-size: 26px;
+}
+
+/* search
+   */
+
+.search-form-wrapper {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+.serch-input{
+    position: relative;
+}
+.search-form-wrapper > div {
+  max-width: 25%;
+  flex: 0 0 25%;
+  padding: 30px;
+}
+.search-form-wrapper > div.guests{
+    max-width: 200px;
+}
+.search-form-wrapper > div:first-child{
+    max-width: 500px;
+    flex: 1;
+}
+.serch-input:not(:last-child):after{
+    content: "";
+    width: 1px;
+    height: 58px;
+    background: #e8e8e8;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.serch-input select {
+  border: none;
+}
+.submit {
+    width: 180px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 180px;
+    flex: 0 0 180px;
+}
+
+.submit button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit button:before {
+    display: none;
+}
+
+.submit button i {
+    background: none;
+    color: #fff;
+    margin: 0px;
+    font-size: 22px;
+}
+
+section.search-bar-sec form {
+    display: flex;
+    background: #fff;
+}
+
+section.search-bar-sec {
+    background: #ebf3f5;
+    padding: 30px;
+}
+.breadcrumb {
+    background: none;
+    justify-content: center;
+}
+
+.breadcrumb-item a {
+    text-align: center;
+    color: #fff;
+}
+
+.breadcrumb-item.active {
+    color: #fff;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: #fff;
+}
+
+.banner-content h2 {
+    text-align: center;
+    color: #fff;
+}
+
+.banner-sec {
+    padding: 80px 30px;
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1;
+}
+
+.banner-sec::after {
+    content: "";
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.6;
+    z-index: -1;
+}
+
+.villa-img {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.item_info_price {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #fff;
+    z-index: 1;
+}
+
+.item_info_price label {display: block;margin: 0px;font-weight: 500;}
+
+.item_info_price span {
+    font-size: 20px;
+    color: #90b0b7;
+    font-weight: 500;
+}
+
+.item-icons span {
+    background-color: #ebf3f5;
+    padding: 0px 10px;
+    font-size: 14px;
+}
+
+.item-icons span i {
+    margin-right: 5px;
+    color: #90b0b7;
+}
+
+.item-icons {
+    margin-bottom: 15px;
+}
+
+.item-title a {
+    font-size: 26px;
+    color: #000;
+    font-weight: 500;
+}
+
+.item-location {
+    color: #a3a3a3;
+}
+
+.villa-img {
+    position: relative;
+    z-index: 1;
+}
+
+.villa-img:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg,rgba(0,0,0,0) 44.27%,rgba(0,0,0,0.8) 100%);
+    z-index: 0;
+}
+img{
+    max-width: 100%;
+    height: auto;
+}
+.vila-list-sec {
+    padding: 100px 0px;
+}
+.list-row > div:not(:last-child){
+    margin-bottom: 30px;
+}
+.price-range-field {
+    width: auto;
+    background-color: transparent;
+    border: 0px;
+    color: black;
+    font-weight: 500;
+    border-radius: 0px;
+    height: auto;
+    padding: 0px;
+    font-size: 14px;
+}
+.price-wrapper{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.price-block.max-price span {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+}
+.price-wrapper span.to {
+    padding: 0px 20px;
+}
+.ui-widget.ui-widget-content {
+    border: 0px;
+    background-color: #E5EEDA;
+    height: 5px;
+    border-radius: 30px;
+}
+
+.ui-widget-header {
+    border: 0px solid #dddddd;
+    background: #cabba1;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+    top: -0.6em;
+    margin-left: -0.1em;
+}
+
+.ui-slider-handle:focus-visible {
+    outline: 0px;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active,
+.ui-state-default,
+.ui-widget-content .ui-state-default.ui-state-hover,
+.ui-widget-header .ui-state-default.ui-state-hover {
+    background: #FFFFFF;
+    border: 4px solid #cabba1;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+}   
+
+@media only screen and (min-width:1500px){
+    .container{
+        max-width: 1440px;
+    }
+}

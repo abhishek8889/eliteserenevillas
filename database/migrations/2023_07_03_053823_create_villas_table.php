@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('max_guest');
             $table->string('location_id')->nullable(); // get from Location table. 
             $table->string('banner_id')->nullable(); // get from media table
+            $table->string('destination_id')->nullable(); // get from destinations table
             $table->timestamps();
         });
     }
